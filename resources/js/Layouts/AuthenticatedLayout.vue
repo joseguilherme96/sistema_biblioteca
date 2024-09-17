@@ -12,20 +12,17 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-vh-100 bg-light">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-                <div class="container">
+        <div class="min-vh-100 bg-light" >
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
                     <!-- Logo -->
                     <Link :href="route('dashboard')" class="navbar-brand">
-                        <ApplicationLogo class="h-9 w-auto text-muted" />
+                    <ApplicationLogo class="h-9 w-auto text-muted" />
                     </Link>
 
                     <!-- Hamburger button for mobile -->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        @click="showingNavigationDropdown = !showingNavigationDropdown"
-                    >
+                    <button class="navbar-toggler" type="button"
+                        @click="showingNavigationDropdown = !showingNavigationDropdown">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
@@ -38,7 +35,7 @@ const showingNavigationDropdown = ref(false);
                         </ul>
 
                         <!-- Settings Dropdown -->
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" style="background-color: #310740; color: white;">
                             <Dropdown align="right">
                                 <template #trigger>
                                     <button class="btn btn-outline-secondary dropdown-toggle">
@@ -55,8 +52,8 @@ const showingNavigationDropdown = ref(false);
                             </Dropdown>
                         </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
 
             <!-- Responsive Navigation Menu for small screens -->
             <div v-if="showingNavigationDropdown" class="bg-white border-top">

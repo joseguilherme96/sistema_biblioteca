@@ -15,7 +15,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/cadastro-livro', function () {
     return Inertia::render('CadastroLivro');
-})->middleware(['auth', 'verified'])->name('cadastro-livro');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
