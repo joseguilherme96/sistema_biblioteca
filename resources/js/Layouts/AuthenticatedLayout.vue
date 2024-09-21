@@ -12,7 +12,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-vh-100 bg-light" >
+        <div class="min-vh-100">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
                     <!-- Logo -->
@@ -30,12 +30,18 @@ const showingNavigationDropdown = ref(false);
                     <div class="collapse navbar-collapse" :class="{ show: showingNavigationDropdown }">
                         <ul class="navbar-nav me-auto">
                             <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="nav-link">
-                                Dashboard
+                                Home
+                            </NavLink>
+                            <NavLink :href="route('cadastro-livro')" :active="route().current('dashboard')"
+                                class="nav-link">
+
+                                Cadastro Livro
+
                             </NavLink>
                         </ul>
 
                         <!-- Settings Dropdown -->
-                        <div class="d-flex align-items-center" style="background-color: #310740; color: white;">
+                        <div class="d-flex align-items-center">
                             <Dropdown align="right">
                                 <template #trigger>
                                     <button class="btn btn-outline-secondary dropdown-toggle">
