@@ -17,7 +17,6 @@ class LivroController extends Controller
 
         try {
 
-
             $validated = $request->validated();
 
             $livroModel = new LivroModel();
@@ -26,6 +25,22 @@ class LivroController extends Controller
             $livroModel->categoria = $validated['categoriaLivro'];
             $livroModel->autor = $validated['autorLivro'];
             $livroModel->descricao = $validated['descricaoLivro'];
+
+            //Verifica se veio arquivo em anexo
+            if ($request->hasFile('capaLivro')) {
+
+                $extensaoImagem = $request->file('capaLivro')->getClientOriginalExtension();
+
+                $nomeParaSalvar = strtolower(str_replace(" ", "_", $livroModel->nome));
+
+                $nomeParaSalvar = "cpa_lvro_".$nomeParaSalvar."_".time(). "." . $extensaoImagem;
+
+                $request->file('capaLivro')->storeAs('imagens', $nomeParaSalvar, 'public');
+                
+                $livroModel->nme_img_cap_lvro = $nomeParaSalvar;
+            }
+
+            
 
             $livroModel->save();
 

@@ -20,6 +20,7 @@ class LivroModel extends Model
         'descricao',
         'autor',
         'categoria',
+        'nme_img_cap_lvro',
         'created_at',
         'updated_at'
 

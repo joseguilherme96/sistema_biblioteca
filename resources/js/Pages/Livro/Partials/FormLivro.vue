@@ -17,6 +17,8 @@
             <v-text-field v-model="formInertia.autorLivro" :rules="autorLivroRules" label="Autor"></v-text-field>
             <v-text-field v-model="formInertia.categoriaLivro" :rules="categoriaLivroRules"
                 label="Categoria"></v-text-field>
+            <v-file-input @input="formInertia.capaLivro = $event.target.files[0]"
+                :rules="capaLivroRules"></v-file-input>
             <v-btn variant="flat" class="mt-4 mr-1" type="submit" @click="validate($refs.form)" color="#310740">
                 Cadastrar
             </v-btn>
@@ -38,7 +40,8 @@ const formInertia = useForm({
     nomeLivro: '',
     categoriaLivro: '',
     autorLivro: '',
-    descricaoLivro: ''
+    descricaoLivro: '',
+    capaLivro: null
 });
 
 const props = defineProps({
@@ -87,25 +90,25 @@ const submit = (form) => {
 
 const nomeLivroRules = [
     value => {
-        if (value?.length >= 3) return true
+        if (value?.length >= 3 && value?.length <=30) return true
 
-        return 'O nome do livro precisa ser maior que 3 caracteres'
+        return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
 ];
 
 const categoriaLivroRules = [
     value => {
-        if (value?.length >= 3) return true
+        if (value?.length >= 3 && value?.length <=30) return true
 
-        return 'O campo categoria precisa ser maior que 3 caracteres'
+        return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
 ];
 
 const autorLivroRules = [
     value => {
-        if (value?.length >= 3) return true
+        if (value?.length >= 3 && value?.length <=30) return true
 
-        return 'O campo autor precisa ser maior que 3 caracteres'
+        return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
 ];
 
@@ -117,11 +120,31 @@ const descricaoLivroRules = [
     },
 ];
 
+const capaLivroRules = [
+    value => {
+
+        let invalido = 0;
+
+        value.forEach((file) => {
+
+            if (file.type.split("/")[0] !== "image") invalido = invalido + 1;
+
+        })
+
+        if (invalido == 0) return true
+
+        return 'O anexo precisa ser uma imagem !'
+    },
+];
+
 const reset = (form) => {
 
     if (form) {
         form.reset();
         form.resetValidation();
+
+        //Resetando o anexo, pois o form.reset() reseta todos os campos, exceto o campo do anexo.
+        formInertia.capaLivro = null;
     }
 
 

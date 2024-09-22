@@ -25,9 +25,9 @@ class LivroRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nomeLivro' => 'required|string|max:255',
-            'categoriaLivro' => 'required|string|max:255',
-            'autorLivro' => 'required|string|max:255',
+            'nomeLivro' => 'required|string|min:3|max:30',
+            'categoriaLivro' => 'required|string|min:3|max:30',
+            'autorLivro' => 'required|string|min:3|max:30',
             'descricaoLivro' => 'required|string',
         ];
     }
