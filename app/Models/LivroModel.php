@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class LivroModel extends Model
 {
@@ -25,4 +26,45 @@ class LivroModel extends Model
         'updated_at'
 
     ];
+
+    public function pesquisar($where=[])
+    {
+        $livro = DB::table("".$this->table."");
+
+        if (!empty($where)) {
+
+            foreach ($where as $needle => $condition) {
+
+                if ($needle == 'id') {
+
+                    $livro->where('id', '=', "" . $condition . "");
+                }
+
+                if ($needle == 'nome') {
+
+                    $livro->where('nome', '=', "" . $condition . "");
+                }
+
+                if ($needle == 'autor') {
+
+                    $livro->where('autor', '=', "" . $condition . "");
+                }
+
+                if ($needle == 'categoria') {
+
+                    $livro->where('categoria', '=', "" . $condition . "");
+                }
+
+                if ($needle == 'valor_pesquisado') {
+
+                    $livro->where('id', '=', "" . $condition . "");
+                    $livro->orWhere('nome', 'like', "" . $condition . "%");
+                    $livro->orWhere('descricao', 'like', "" . $condition . "%");
+                    $livro->orWhere('autor', 'like', "" . $condition . "%");
+                }
+            }
+        }
+
+        return $livro->get();
+    }
 }
