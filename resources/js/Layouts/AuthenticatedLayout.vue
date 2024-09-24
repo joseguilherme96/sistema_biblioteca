@@ -29,15 +29,46 @@ const showingNavigationDropdown = ref(false);
                     <!-- Navigation Links -->
                     <div class="collapse navbar-collapse" :class="{ show: showingNavigationDropdown }">
                         <ul class="navbar-nav me-auto">
-                            <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="nav-link">
-                                Home
-                            </NavLink>
-                            <NavLink :href="route('cadastro-livro')" :active="route().current('dashboard')"
-                                class="nav-link">
+                            <li class="mr-5 mt-1">
+                                <v-menu open-on-hover>
+                                    <template v-slot:activator="{ props }">
+                                        <v-btn color="#310740" v-bind="props">
+                                            <NavLink :href="route('dashboard')" :active="route().current('dashboard')"
+                                                class="nav-link" style="color: white;">
+                                                Home
+                                            </NavLink>
+                                        </v-btn>
+                                    </template>
+                                </v-menu>
+                            </li>
+                            <li class="mr-5  mt-1">
+                                <v-menu open-on-hover>
+                                    <template v-slot:activator="{ props }">
+                                        <v-btn color="#310740" v-bind="props">
+                                            Livros
+                                        </v-btn>
+                                    </template>
+                                    <v-list>
+                                        <v-list-item :key="0">
+                                            <v-list-item-title>
+                                                <NavLink :href="route('cadastro-livro')"
+                                                    :active="route().current('dashboard')" class="nav-link">
+                                                    Cadastro
+                                                </NavLink>
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                        <v-list-item :key="1">
+                                            <v-list-item-title>
+                                                <NavLink :href="route('lista_livro')"
+                                                    :active="route().current('dashboard')" class="nav-link">
+                                                    Lista
+                                                </NavLink>
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-menu>
+                            </li>
 
-                                Cadastro Livro
-
-                            </NavLink>
                         </ul>
 
                         <!-- Settings Dropdown -->
