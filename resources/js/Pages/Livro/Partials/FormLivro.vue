@@ -12,13 +12,13 @@
         <v-form fast-fail @submit.prevent ref="form">
             <v-text-field v-model="formInertia.nomeLivro" :rules="nomeLivroRules" label="Nome Livro">
             </v-text-field>
-            <v-text-field v-model="formInertia.descricaoLivro" :rules="descricaoLivroRules"
-                label="Descrição"></v-text-field>
             <v-text-field v-model="formInertia.autorLivro" :rules="autorLivroRules" label="Autor"></v-text-field>
             <v-text-field v-model="formInertia.categoriaLivro" :rules="categoriaLivroRules"
                 label="Categoria"></v-text-field>
-            <v-file-input @input="formInertia.capaLivro = $event.target.files[0]"
+            <v-file-input @input="formInertia.capaLivro = $event.target.files[0]" label="Anexo capa livro"
                 :rules="capaLivroRules"></v-file-input>
+            <v-textarea label="Descrição" v-model="formInertia.descricaoLivro"
+                :rules="descricaoLivroRules"></v-textarea>
             <v-btn variant="flat" class="mt-4 mr-1" type="submit" @click="validate($refs.form)" color="#310740">
                 Cadastrar
             </v-btn>
@@ -90,7 +90,7 @@ const submit = (form) => {
 
 const nomeLivroRules = [
     value => {
-        if (value?.length >= 3 && value?.length <=30) return true
+        if (value?.length >= 3 && value?.length <= 30) return true
 
         return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
@@ -98,7 +98,7 @@ const nomeLivroRules = [
 
 const categoriaLivroRules = [
     value => {
-        if (value?.length >= 3 && value?.length <=30) return true
+        if (value?.length >= 3 && value?.length <= 30) return true
 
         return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
@@ -106,7 +106,7 @@ const categoriaLivroRules = [
 
 const autorLivroRules = [
     value => {
-        if (value?.length >= 3 && value?.length <=30) return true
+        if (value?.length >= 3 && value?.length <= 30) return true
 
         return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
