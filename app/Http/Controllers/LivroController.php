@@ -38,9 +38,12 @@ class LivroController extends Controller
                 $request->file('capaLivro')->storeAs('imagens', $nomeParaSalvar, 'public');
                 
                 $livroModel->nme_img_cap_lvro = $nomeParaSalvar;
-            }
 
-            
+                if (strlen($livroModel->nme_img_cap_lvro) > 100) {
+
+                    return redirect()->back()->with('error', 'O nome da capa do livro gerado excedeu o limite de caracteres !');
+                }
+            }
 
             $livroModel->save();
 
