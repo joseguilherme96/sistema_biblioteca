@@ -68,6 +68,25 @@ const showingNavigationDropdown = ref(false);
                                     </v-list>
                                 </v-menu>
                             </li>
+                            <li class="mr-5  mt-1">
+                                <v-menu open-on-hover>
+                                    <template v-slot:activator="{ props }">
+                                        <v-btn color="#310740" v-bind="props">
+                                            Estoque
+                                        </v-btn>
+                                    </template>
+                                    <v-list>
+                                        <v-list-item :key="0">
+                                            <v-list-item-title>
+                                                <NavLink :href="route('cadastro-entrada-livro')"
+                                                    :active="route().current('dashboard')" class="nav-link">
+                                                    Entrada
+                                                </NavLink>
+                                            </v-list-item-title>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-menu>
+                            </li>
 
                         </ul>
 

@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\EntradaLivroEstoque;
 use App\Http\Controllers\ListaLivroController;
 use App\Http\Controllers\LivroController;
 
@@ -25,6 +26,11 @@ Route::post('cadastrar_livro', [LivroController::class, 'salvar'])
 Route::get('/lista-livro', [ListaLivroController::class, 'index'])->middleware(['auth', 'verified'])->name('lista_livro');
 
 Route::post('/lista-livro', [ListaLivroController::class, 'pesquisar'])->middleware(['auth', 'verified'])->name('pesquisar_livro');
+
+
+Route::get('/cadastro-entrada-livro',[EntradaLivroEstoque::class, 'index'])->middleware(['auth', 'verified'])->name('cadastro-entrada-livro');
+Route::post('/cadastro-entrada-livro',[EntradaLivroEstoque::class, 'salvar'])->middleware(['auth', 'verified'])->name('cadastro-entrada-livro');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
