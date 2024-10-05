@@ -7,7 +7,7 @@
                 <v-col cols="12" md="4" lg="3" v-for="(livro, index) in livros" class="text-center">
                     <CardLivro :livro="livro">
                             <v-btn variant="flat" color="#310740" class="m-1" @click="reservar">Reservar</v-btn>
-                            <v-btn variant="flat" color="#310740" class="m-1" @click="abrirModalEditarLivro(index)">Editar</v-btn>
+                            <v-btn variant="flat" color="#310740" class="m-1" @click="abrirModalEditarLivro(livro)">Editar</v-btn>
                             <v-btn variant="flat" color="#310740" class="m-1" @click="deletarLivro">Deletar</v-btn>
                     </CardLivro>
                 </v-col>
@@ -21,9 +21,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import CardLivro from './Partials/CardLivro.vue';
 import InputPesquisaNoBanco from '@/Components/InputPesquisaNoBanco.vue';
 import ModalEditarLivro from './Partials/ModalEditarLivro.vue';
-import {ref} from 'vue'
+import {ref,watch} from 'vue'
 
-const modal = ref({ data:null, exibir: false,title:'Editar'});
+const modal = ref({ data:null, exibir: false,title:'Editar',livro:null});
 
 defineProps({
 
@@ -40,9 +40,9 @@ const reservar = ()=>{
 
 }
 
-const abrirModalEditarLivro = ()=>{
+const abrirModalEditarLivro = (livro)=>{
 
-    ///Função que será desenvolvida para abrir modal para editar livro
+    modal.value.livro = livro;
     modal.value.exibir = true;
 
 }

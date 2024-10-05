@@ -12,6 +12,32 @@ use Inertia\Inertia;
 class LivroController extends Controller
 {
 
+    public function uploadCapaLivro($request, $nome_livro)
+    {
+
+        $nomeParaSalvar = '';
+
+        //Verifica se veio arquivo em anexo
+        if ($request->hasFile('capaLivro')) {
+
+            $extensaoImagem = $request->file('capaLivro')->getClientOriginalExtension();
+
+            $nomeParaSalvar = strtolower(str_replace(" ", "_", $nome_livro));
+
+            $nomeParaSalvar = "cpa_lvro_" . $nomeParaSalvar . "_" . time() . "." . $extensaoImagem;
+
+            $request->file('capaLivro')->storeAs('imagens', $nomeParaSalvar, 'public');
+
+
+            if (strlen($nomeParaSalvar) > 100) {
+
+                return redirect()->back()->with('error', 'O nome da capa do livro gerado excedeu o limite de caracteres !');
+            }
+        }
+
+        return $nomeParaSalvar;
+    }
+
     public function salvar(LivroRequest $request)
     {
 
@@ -26,24 +52,8 @@ class LivroController extends Controller
             $livroModel->autor = $validated['autorLivro'];
             $livroModel->descricao = $validated['descricaoLivro'];
 
-            //Verifica se veio arquivo em anexo
-            if ($request->hasFile('capaLivro')) {
-
-                $extensaoImagem = $request->file('capaLivro')->getClientOriginalExtension();
-
-                $nomeParaSalvar = strtolower(str_replace(" ", "_", $livroModel->nome));
-
-                $nomeParaSalvar = "cpa_lvro_".$nomeParaSalvar."_".time(). "." . $extensaoImagem;
-
-                $request->file('capaLivro')->storeAs('imagens', $nomeParaSalvar, 'public');
-                
-                $livroModel->nme_img_cap_lvro = $nomeParaSalvar;
-
-                if (strlen($livroModel->nme_img_cap_lvro) > 100) {
-
-                    return redirect()->back()->with('error', 'O nome da capa do livro gerado excedeu o limite de caracteres !');
-                }
-            }
+            //Faz upload do livro e retorna nome da imagem gerada
+            $livroModel->nme_img_cap_lvro = $this->uploadCapaLivro($request, $validated['nomeLivro']);
 
             $livroModel->save();
 
@@ -51,6 +61,33 @@ class LivroController extends Controller
         } catch (Exception $e) {
 
             return redirect()->back()->with('error', 'Falha ao cadastrar o livro !');
+        }
+    }
+
+    public function atualizar($id, LivroRequest $request)
+    {
+        try {
+
+            $validated = $request->validated();
+
+            $livroModel = new LivroModel();
+
+            $livro = $livroModel->find($id);
+
+            $livro->nome = $validated['nomeLivro'];
+            $livro->categoria = $validated['categoriaLivro'];
+            $livro->autor = $validated['autorLivro'];
+            $livro->descricao = $validated['descricaoLivro'];
+
+            //Faz upload do livro e retorna nome da imagem gerada
+            $livroModel->nme_img_cap_lvro = $this->uploadCapaLivro($request, $validated['nomeLivro']);
+
+            $livro->save();
+
+            return redirect()->back()->with('success', 'O livro foi alterado com sucesso!');
+        } catch (Exception $e) {
+
+            return redirect()->back()->with('error', 'Falha ao alterar o livro !');
         }
     }
 }

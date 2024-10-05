@@ -20,7 +20,7 @@
             <v-textarea label="Descrição" v-model="formInertia.descricaoLivro"
                 :rules="descricaoLivroRules"></v-textarea>
             <v-btn variant="flat" class="mt-4 mr-1" type="submit" @click="validate($refs.form)" color="#310740">
-                Cadastrar
+                Salvar
             </v-btn>
             <v-btn class="mt-4" color="#310740" @click="reset($refs.form)">
                 Limpar dados
@@ -33,10 +33,11 @@
 <script setup>
 
 import { useForm } from '@inertiajs/vue3';
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import Alert from '@/Components/Alert.vue';
 
 const formInertia = useForm({
+    id:null,
     nomeLivro: '',
     categoriaLivro: '',
     autorLivro: '',
@@ -45,6 +46,12 @@ const formInertia = useForm({
 });
 
 const props = defineProps({
+
+    dadosLivroEditar: {
+
+        type: Object
+
+    },
 
     errors: {
 
@@ -57,30 +64,61 @@ const mensagem = ref({ status: '', message: '', exibir: false });
 
 const submit = (form) => {
 
-    formInertia.post(route('cadastrar_livro'), {
+    if (formInertia.id == null) {
 
-        //Callbacks
-        onSuccess: (page) => {
+        formInertia.post(route('cadastrar_livro'), {
 
-            if (page.props.flash.success) {
-                mensagem.value = { status: 'success', message: page.props.flash.success, exibir: true, title: 'Cadastro' }
-                reset(form) // Reseta o formulário após o sucesso
+            //Callbacks
+            onSuccess: (page) => {
 
-            } else if (page.props.flash.error) {
+                if (page.props.flash.success) {
+                    mensagem.value = { status: 'success', message: page.props.flash.success, exibir: true, title: 'Cadastro' }
+                    reset(form) // Reseta o formulário após o sucesso
 
-                mensagem.value = { status: 'error', message: page.props.flash.error, exibir: true, title: 'Cadastro' }
+                } else if (page.props.flash.error) {
+
+                    mensagem.value = { status: 'error', message: page.props.flash.error, exibir: true, title: 'Cadastro' }
+
+                }
+
+            },
+
+            onError: (errors) => {
+
+                mensagem.value = { status: 'error', message: 'Ocorreu um erro ao cadastrar um livro', exibir: true, title: 'Cadastro' }
 
             }
 
-        },
+        });
+    } else {
 
-        onError: (errors) => {
+        formInertia.put(route('editar_livro',formInertia.id), {
 
-            mensagem.value = { status: 'error', message: 'Ocorreu um erro ao cadastrar um livro', exibir: true, title: 'Cadastro' }
+            //Callbacks
+            onSuccess: (page) => {
 
-        }
+                if (page.props.flash.success) {
+                    mensagem.value = { status: 'success', message: page.props.flash.success, exibir: true, title: 'Cadastro' }
+                    reset(form) // Reseta o formulário após o sucesso
 
-    });
+                } else if (page.props.flash.error) {
+
+                    mensagem.value = { status: 'error', message: page.props.flash.error, exibir: true, title: 'Cadastro' }
+
+                }
+
+            },
+
+            onError: (errors) => {
+
+                mensagem.value = { status: 'error', message: `Ocorreu um erro ao alterar um livro ${errors}`, exibir: true, title: 'Cadastro' }
+
+                console.log(errors);
+
+            }
+
+        });
+    }
 
 
 
@@ -159,6 +197,24 @@ const validate = async (form) => {
 
     }
 }
+
+//Ao contrário do watch, watchEffect monitoria todas as dependencias passadas na props, independente se o componente foi reconstruido ou não...
+watchEffect(() => {
+
+
+    if (props.dadosLivroEditar) {
+        
+        console.log("ss")
+        formInertia.nomeLivro = props.dadosLivroEditar.nome;
+        formInertia.autorLivro = props.dadosLivroEditar.autor;
+        formInertia.categoriaLivro = props.dadosLivroEditar.categoria;
+        formInertia.descricaoLivro = props.dadosLivroEditar.descricao;
+        //formInertia.capaLivro = props.dadosLivroEditar.nme_img_cap_lvro;
+        formInertia.id = props.dadosLivroEditar.id;
+
+    }
+
+});
 
 
 </script>

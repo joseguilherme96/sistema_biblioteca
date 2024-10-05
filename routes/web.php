@@ -23,6 +23,9 @@ Route::get('/cadastro-livro', function () {
 Route::post('cadastrar_livro', [LivroController::class, 'salvar'])
     ->name('cadastrar_livro');
 
+Route::put('editar_livro/{id}', [LivroController::class, 'atualizar'])
+    ->name('editar_livro');
+
 Route::get('/lista-livro', [ListaLivroController::class, 'index'])->middleware(['auth', 'verified'])->name('lista_livro');
 
 Route::post('/lista-livro', [ListaLivroController::class, 'pesquisar'])->middleware(['auth', 'verified'])->name('pesquisar_livro');
