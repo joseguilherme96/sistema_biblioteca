@@ -107,6 +107,12 @@ const showingNavigationDropdown = ref(false);
                                 </template>
                             </Dropdown>
                         </div>
+                        <button class="ml-2 btn btn-outline-secondary">
+                            <NavLink :href="route('carrinho_livro')" :active="route().current('dashboard')"
+                                class="nav-link">
+                                Carrinho
+                            </NavLink>
+                        </button>
                     </div>
                 </nav>
             </div>

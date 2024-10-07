@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CarrinhoLivro;
 use App\Http\Controllers\EntradaLivroEstoque;
 use App\Http\Controllers\ListaLivroController;
 use App\Http\Controllers\LivroController;
@@ -29,6 +30,8 @@ Route::put('editar_livro/{id}', [LivroController::class, 'atualizar'])
 Route::get('/lista-livro', [ListaLivroController::class, 'index'])->middleware(['auth', 'verified'])->name('lista_livro');
 
 Route::post('/lista-livro', [ListaLivroController::class, 'pesquisar'])->middleware(['auth', 'verified'])->name('pesquisar_livro');
+
+Route::get('/livros-adicionados-para-reserva', [CarrinhoLivro::class, 'index'])->middleware(['auth', 'verified'])->name('carrinho_livro');
 
 
 Route::get('/cadastro-entrada-livro',[EntradaLivroEstoque::class, 'index'])->middleware(['auth', 'verified'])->name('cadastro-entrada-livro');
