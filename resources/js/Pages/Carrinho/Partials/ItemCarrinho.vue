@@ -1,5 +1,5 @@
 <template>
-
+    <Alert :dialogVisible="mensagem"></Alert>
     <v-card>
         <v-row>
             <v-col cols="12" md="4" lg="4">
@@ -36,10 +36,13 @@
 
 import Minus from '@/Components/Minus.vue';
 import Plus from '@/Components/Plus.vue';
+import Alert from '@/Components/Alert.vue';
+import { ref } from 'vue';
 
 const BASE_URL = import.meta.env.BASE_URL;
 const CAMINHO_PASTA_IMAGENS_CAPA_LIVRO = import.meta.env.VITE_CAMINHO_PASTA_IMAGENS_CAPA_LIVRO;
 const LINK_PASTA = BASE_URL + CAMINHO_PASTA_IMAGENS_CAPA_LIVRO;
+const mensagem = ref({ status: '', message: '', exibir: false });
 
 const props = defineProps({
 
@@ -54,15 +57,58 @@ const props = defineProps({
 
 // Aumenta a quantidade de um livro
 const aumentaQuantidade = () => {
-    props.item.quantidade++;
+
+    if (props.item.quantidade < props.item.qtd_lvro_estqe) {
+
+        props.item.quantidade++;
+
+        atualizaQuantidadeLivroLocalStorage();
+    } else {
+
+        mensagem.value.status = "error";
+        mensagem.value.message = `A quantidade que você tentou selecionar excede o limite do estoque, limite máximo disponível ${props.item.qtd_lvro_estqe}!`;
+        mensagem.value.title = "Aviso";
+        mensagem.value.exibir = true;
+
+    }
+
 };
 
 // Diminui a quantidade de um livro
-const diminuiQuantidade = (index) => {
+const diminuiQuantidade = () => {
+
     if (props.item.quantidade > 1) {
+
         props.item.quantidade--;
+
+        atualizaQuantidadeLivroLocalStorage();
     }
+
+
 };
+
+const atualizaQuantidadeLivroLocalStorage = () => {
+
+    const livrosCarrinhoString = localStorage.getItem('livrosCarrinho');
+    const livrosCarrinhoTemp = JSON.parse(livrosCarrinhoString);
+
+    //Percorre livros adicionados no local storage
+    livrosCarrinhoTemp.forEach((livro,index)=>{
+        
+        if(livro.id == props.item.id){
+            
+            //Atualiza a quantidade livro
+            livrosCarrinhoTemp[index].quantidade =  props.item.quantidade;
+
+        }
+
+    })
+
+    //Após livro com quantidade alterada, salva novamente no local storage
+    localStorage.setItem('livrosCarrinho', JSON.stringify(livrosCarrinhoTemp))
+
+
+}
 
 
 </script>
