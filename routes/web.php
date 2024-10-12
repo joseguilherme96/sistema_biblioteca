@@ -17,9 +17,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/cadastro-livro', function () {
-    return Inertia::render('Livro/CadastroLivro');
-})->middleware(['auth', 'verified'])->name('cadastro-livro');
+Route::get('/cadastro-livro',[LivroController::class, 'index'])->middleware(['auth', 'verified'])->name('cadastro-livro');
 
 Route::post('cadastrar_livro', [LivroController::class, 'salvar'])
     ->name('cadastrar_livro');

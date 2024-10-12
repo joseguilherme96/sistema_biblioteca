@@ -12,6 +12,14 @@ use Inertia\Inertia;
 class LivroController extends Controller
 {
 
+    public function index(){
+
+        return Inertia::render('Livro/CadastroLivro', [
+            'status' => session('status')
+        ]);
+
+    }
+
     public function uploadCapaLivro($request, $nome_livro)
     {
 
