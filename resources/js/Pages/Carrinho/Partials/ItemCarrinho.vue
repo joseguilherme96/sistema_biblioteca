@@ -1,11 +1,13 @@
 <template>
 
     <v-card>
-        <div class="d-flex flex-no-wrap">
-            <v-avatar class="ma-3" rounded="0" size="300">
-                <v-img :src="LINK_PASTA + item.nme_img_cap_lvro"></v-img>
-            </v-avatar>
-            <div>
+        <v-row>
+            <v-col cols="12" md="4" lg="4">
+                <v-avatar class="ma-3" rounded="0" size="300">
+                    <v-img :src="LINK_PASTA + item.nme_img_cap_lvro"></v-img>
+                </v-avatar>
+            </v-col>
+            <v-col cols="12" md="8" lg="8">
                 <v-card-title class="text-h5">
                     {{ item.nome }}
                 </v-card-title>
@@ -24,8 +26,8 @@
                         <Plus></Plus>
                     </v-btn>
                 </v-card-actions>
-            </div>
-        </div>
+            </v-col>
+        </v-row>
     </v-card>
 
 </template>
