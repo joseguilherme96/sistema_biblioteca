@@ -2,8 +2,8 @@
 
     <v-card>
         <div class="d-flex flex-no-wrap">
-            <v-avatar class="ma-3" rounded="0" size="125">
-                <v-img :src="item.linkImagemCapaLivro"></v-img>
+            <v-avatar class="ma-3" rounded="0" size="300">
+                <v-img :src="LINK_PASTA + item.nme_img_cap_lvro"></v-img>
             </v-avatar>
             <div>
                 <v-card-title class="text-h5">
@@ -34,6 +34,10 @@
 
 import Minus from '@/Components/Minus.vue';
 import Plus from '@/Components/Plus.vue';
+
+const BASE_URL = import.meta.env.BASE_URL;
+const CAMINHO_PASTA_IMAGENS_CAPA_LIVRO = import.meta.env.VITE_CAMINHO_PASTA_IMAGENS_CAPA_LIVRO;
+const LINK_PASTA = BASE_URL + CAMINHO_PASTA_IMAGENS_CAPA_LIVRO;
 
 const props = defineProps({
 

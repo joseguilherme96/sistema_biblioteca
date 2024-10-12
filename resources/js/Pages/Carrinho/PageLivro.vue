@@ -11,13 +11,9 @@
                 Não há livros adicionados ao carrinho
             </v-col>
         </v-row>
-        <v-card-actions>
-            <v-btn class="mt-4" color="#310740" @click="finalizarReserva">
-                Finalizar reserva
-            </v-btn>
-            <v-btn class="mt-4" color="#310740" @click="limparCarrinho">
-                Limpar Carrinho
-            </v-btn>
+        <v-card-actions class="justify-content-end">
+            <Button :nome="'Finalizar reserva'" @click="finalizarReserva"></Button>
+            <Button :nome="'Limpar Carrinho'" @click="limparCarrinho"></Button>
         </v-card-actions>
 
     </AuthenticatedLayout>
@@ -30,6 +26,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { onMounted, ref, watch } from 'vue'
 import ItemCarrinho from './Partials/ItemCarrinho.vue';
+import Button from '@/Components/Button.vue';
 
 const livrosCarrinho = ref(null);
 
