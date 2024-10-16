@@ -9,6 +9,7 @@ use App\Http\Controllers\CarrinhoLivro;
 use App\Http\Controllers\EntradaLivroEstoque;
 use App\Http\Controllers\ListaLivroController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\ReservaLivroController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
@@ -34,6 +35,8 @@ Route::get('/livros-adicionados-para-reserva', [CarrinhoLivro::class, 'index'])-
 
 Route::get('/cadastro-entrada-livro',[EntradaLivroEstoque::class, 'index'])->middleware(['auth', 'verified'])->name('cadastro-entrada-livro');
 Route::post('/cadastro-entrada-livro',[EntradaLivroEstoque::class, 'salvar'])->middleware(['auth', 'verified'])->name('cadastro-entrada-livro');
+
+Route::post('/cadastrar_reserva',[ReservaLivroController::class, 'ReservaLivro'])->middleware(['auth', 'verified'])->name('cadastrar_reserva');
 
 
 Route::middleware('auth')->group(function () {
