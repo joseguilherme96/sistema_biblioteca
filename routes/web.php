@@ -39,6 +39,7 @@ Route::post('/cadastro-entrada-livro',[EntradaLivroEstoque::class, 'salvar'])->m
 Route::post('/cadastrar_reserva',[ReservaLivroController::class, 'ReservaLivro'])->middleware(['auth', 'verified'])->name('cadastrar_reserva');
 Route::get('/lista-reservas', [ReservaLivroController::class, 'selectReserva'])->middleware(['auth', 'verified'])->name('listar_reservas');
 Route::post('/lista-reservas', [ReservaLivroController::class, 'pesquisar'])->middleware(['auth', 'verified'])->name('pesquisar_reserva');
+Route::get('/exibir-reserva/{id}', [ReservaLivroController::class, 'exibirReserva'])->middleware(['auth', 'verified'])->name('exibir_reserva');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

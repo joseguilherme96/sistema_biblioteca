@@ -177,4 +177,23 @@ class ReservaLivroController extends Controller
             'reservas' => $reservas
         ]);
     }
+
+    public function exibirReserva(Request $reserva)
+    {
+        
+        //Pega o id da url segment
+        $id_reserva_livro = $reserva->segment(2);
+        
+        $reservaLivroModel = new \App\Models\ReservaLivroModel();
+        $reservas = $reservaLivroModel->pesquisarReserva(['id_reserva_livro'=>$id_reserva_livro]);
+
+        $reservaLivroItensModel = new \App\Models\ReservaLivroItensModel();
+        $itens = $reservaLivroItensModel->pesquisarItensReservados(['reserva_id'=>$id_reserva_livro]);
+
+        return Inertia::render('Reserva/PageExibirReserva', [
+            'status' => session('status'),
+            'reservas' => $reservas,
+            'itens'=>$itens
+        ]);
+    }
 }

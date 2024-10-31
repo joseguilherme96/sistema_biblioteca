@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ReservaLivroItensModel extends Model
 {
@@ -19,4 +20,28 @@ class ReservaLivroItensModel extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function pesquisarItensReservados($where = [])
+    {
+
+        $reservaLivroItens = DB::table($this->table)
+        ->join('livro','reserva_livro_itens.livro_id','=','livro.id');
+
+
+        if (!empty($where)) {
+
+            foreach ($where as $key => $value) {
+
+
+                if ($key == 'reserva_id') {
+
+                    $reservaLivroItens->where('reserva_livro_itens.reserva_id', '=', $value);
+                }
+
+                
+            }
+        }
+
+        return $reservaLivroItens->get();
+    }
 }
