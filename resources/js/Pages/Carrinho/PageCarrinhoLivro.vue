@@ -33,8 +33,20 @@ import Alert from '@/Components/Alert.vue';
 
 const livrosCarrinho = ref([]);
 const mensagem = ref({ status: '', message: '', exibir: false });
+
+
+const props = defineProps({
+
+    auth: {
+        type: Object,
+        required: true
+    }
+
+})
+
 const form = useForm({
-    livrosReserva: [{}]
+    livrosReserva: [{}],
+    id_user: props.auth.user.id
 });
 
 onMounted(() => {
@@ -59,6 +71,7 @@ const separaDadosParaFinalizarReserva = () => {
         });
 
         form.livrosReserva = livros;
+
     } else {
 
         mensagem.value.status = "error";
@@ -116,7 +129,7 @@ const limparCarrinho = () => {
     //Limpa carrinho
     localStorage.removeItem("livrosCarrinho");
     livrosCarrinho.value = null;
-    
+
     //Atualiza pagina
     window.location.href = '';
 

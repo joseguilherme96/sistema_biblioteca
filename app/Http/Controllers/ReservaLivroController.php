@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EstoqueLivroModel;
 use Exception;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ReservaLivroController extends Controller
 {
@@ -98,7 +99,7 @@ class ReservaLivroController extends Controller
 
                 $where['livro_id'] = $livro['id_livro'];
                 $id_motivo = 1; //Motivo da baixa reserva 1 = reserva
-                $baixa_estoque = $estoqueLivroModel->baixaQuantidadeNoEstoque($where, $livro['quantidade'],$id_motivo);
+                $baixa_estoque = $estoqueLivroModel->baixaQuantidadeNoEstoque($where, $livro['quantidade'], $id_motivo);
 
                 array_push($returns, $baixa_estoque);
             }
@@ -126,7 +127,6 @@ class ReservaLivroController extends Controller
         $this->validacaoItensParaReserva($livrosAReservar);
 
         //Cria reserva
-        $livrosAReservar['id_user'] = 1;
         $id_reserva = $this->criaReserva($livrosAReservar);
 
         if (!$id_reserva) {
@@ -150,5 +150,31 @@ class ReservaLivroController extends Controller
         }
 
         redirect()->back()->with('success', "A reserva N° $id_reserva foi criada com sucesso !");
+    }
+
+    public function selectReserva()
+    {
+
+        $reservaLivroModel = new \App\Models\ReservaLivroModel();
+
+        $reservas = $reservaLivroModel->pesquisarReserva();
+
+        return Inertia::render('Reserva/PageListaReservas', [
+            'status' => session('status'),
+            'reservas' => $reservas
+        ]);
+    }
+
+    public function pesquisar(Request $request)
+    {
+
+        $livroModel = new \App\Models\ReservaLivroModel();
+
+        $reservas = $livroModel->pesquisarReserva(['valor_pesquisado' => $request['valorPesquisado']]);
+
+        return Inertia::render('Reserva/PageListaReservas', [
+            'status' => session('status'),
+            'reservas' => $reservas
+        ]);
     }
 }
