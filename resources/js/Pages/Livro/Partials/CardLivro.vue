@@ -1,5 +1,5 @@
 <template>
-    <v-card variant="tonal" class="mt-5">
+    <v-card variant="text" color="#310740" class="mt-5">
         <v-img :width="200" :height="300" aspect-ratio="1/1" cover
             :src="'http://127.0.0.1:8000/storage/imagens/' + livro.nme_img_cap_lvro"></v-img>
         <v-card-title>{{ livro.nome }}</v-card-title>

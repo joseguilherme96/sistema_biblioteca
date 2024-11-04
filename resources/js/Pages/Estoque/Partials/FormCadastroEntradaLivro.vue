@@ -1,14 +1,23 @@
 <template>
     <Alert :dialogVisible="mensagem"></Alert>
-    <h3 class="text-center" style="font-weight: 100;">Entrada livro</h3>
-
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-box-arrow-in-left"
+        viewBox="0 0 16 16" color="#310740">
+        <path fill-rule="evenodd"
+            d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
+        <path fill-rule="evenodd"
+            d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+    </svg>
+    <h3 class="text-center" style="font-weight: 100; color: #310740">Entrada livro</h3>
     <v-sheet class="mx-auto m-5" width="900">
         <v-form fast-fail @submit.prevent ref="form">
-            <v-combobox label="Nome do livro" :items="nomesLivros" v-model="formInertia.nomeLivro"
-                @update:model-value="setIdLivro" :rules="nomeLivroRules" @keyup.delete="clearCampoSelecaoLivro"></v-combobox>
-            <v-combobox label="Endereço do livro" :items="enderecosLivro" 
-            v-model="formInertia.enderecoLivro" @update:model-value="setIdEnderecoLivro" :rules="enderecoLivroRules" @keyup.delete="clearCampoSelecaoEndereco"></v-combobox>
-            <v-text-field label="Quantidade" type="number" v-model="formInertia.quantidade" :rules="quantidadeRules"></v-text-field>
+            <v-combobox variant="outlined" color="#310740" label="Nome do livro" :items="nomesLivros"
+                v-model="formInertia.nomeLivro" @update:model-value="setIdLivro" :rules="nomeLivroRules"
+                @keyup.delete="clearCampoSelecaoLivro"></v-combobox>
+            <v-combobox variant="outlined" color="#310740" label="Endereço do livro" :items="enderecosLivro"
+                v-model="formInertia.enderecoLivro" @update:model-value="setIdEnderecoLivro" :rules="enderecoLivroRules"
+                @keyup.delete="clearCampoSelecaoEndereco"></v-combobox>
+            <v-text-field variant="outlined" color="#310740" label="Quantidade" type="number"
+                v-model="formInertia.quantidade" :rules="quantidadeRules"></v-text-field>
             <v-btn variant="flat" class="mt-4 mr-1" type="submit" @click="validate($refs.form)" color="#310740">
                 Cadastrar
             </v-btn>
@@ -28,10 +37,10 @@ import Alert from '@/Components/Alert.vue';
 
 const formInertia = useForm({
     idLivro: '',
-    idEndereco:'',
+    idEndereco: '',
     nomeLivro: '',
-    enderecoLivro:'',
-    quantidade:0
+    enderecoLivro: '',
+    quantidade: 0
 });
 
 const props = defineProps({
@@ -46,9 +55,9 @@ const props = defineProps({
         type: Object
 
     },
-    enderecos:{
+    enderecos: {
 
-        type:Object
+        type: Object
     }
 
 })
@@ -98,7 +107,7 @@ const nomeLivroRules = [
         return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
     value => {
-        if (formInertia.idLivro !=='') return true
+        if (formInertia.idLivro !== '') return true
 
         return 'O livro seleionado é inválido !'
     },
@@ -111,7 +120,7 @@ const enderecoLivroRules = [
         return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
     value => {
-        if (formInertia.idEndereco !=='') return true
+        if (formInertia.idEndereco !== '') return true
 
         return 'Endereço inválido !'
     },
@@ -119,9 +128,9 @@ const enderecoLivroRules = [
 
 const quantidadeRules = [
 
-    value=>{
+    value => {
 
-        if(value > 0) return true
+        if (value > 0) return true
 
         return 'A quantidade deve ser maior que zero'
 
@@ -156,7 +165,7 @@ onMounted(() => {
 
     //Percorre a props livros pegando apenas o nome do livro
     nomesLivros.value = props.livros.map((linha) => linha.nome)
-    enderecosLivro.value = props.enderecos.map((linha)=>linha.descricao)
+    enderecosLivro.value = props.enderecos.map((linha) => linha.descricao)
 
 })
 
@@ -184,16 +193,16 @@ const setIdEnderecoLivro = () => {
 
 }
 
-const clearCampoSelecaoLivro = ()=>{
+const clearCampoSelecaoLivro = () => {
 
     formInertia.nomeLivro = ''
     formInertia.idLivro = ''
 }
 
-const clearCampoSelecaoEndereco = ()=>{
+const clearCampoSelecaoEndereco = () => {
 
-formInertia.enderecoLivro = ''
-formInertia.idEndereco = ''
+    formInertia.enderecoLivro = ''
+    formInertia.idEndereco = ''
 
 }
 

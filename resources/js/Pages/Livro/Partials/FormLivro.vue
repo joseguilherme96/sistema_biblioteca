@@ -10,14 +10,14 @@
 
     <v-sheet class="mx-auto m-5" width="900">
         <v-form fast-fail @submit.prevent ref="form">
-            <v-text-field v-model="formInertia.nomeLivro" :rules="nomeLivroRules" label="Nome Livro">
+            <v-text-field variant="outlined" color="#310740" v-model="formInertia.nomeLivro" :rules="nomeLivroRules" label="Nome Livro">
             </v-text-field>
-            <v-text-field v-model="formInertia.autorLivro" :rules="autorLivroRules" label="Autor"></v-text-field>
-            <v-text-field v-model="formInertia.categoriaLivro" :rules="categoriaLivroRules"
+            <v-text-field variant="outlined" color="#310740" v-model="formInertia.autorLivro" :rules="autorLivroRules" label="Autor"></v-text-field>
+            <v-text-field variant="outlined" color="#310740" v-model="formInertia.categoriaLivro" :rules="categoriaLivroRules"
                 label="Categoria"></v-text-field>
-            <v-file-input @input="formInertia.capaLivro = $event.target.files[0]" label="Anexo capa livro"
+            <v-file-input variant="outlined" color="#310740" @input="formInertia.capaLivro = $event.target.files[0]" label="Anexo capa livro"
                 :rules="capaLivroRules"></v-file-input>
-            <v-textarea label="Descrição" v-model="formInertia.descricaoLivro"
+            <v-textarea variant="outlined" color="#310740" label="Descrição" v-model="formInertia.descricaoLivro"
                 :rules="descricaoLivroRules"></v-textarea>
             <v-btn variant="flat" class="mt-4 mr-1" type="submit" @click="validate($refs.form)" color="#310740">
                 Salvar

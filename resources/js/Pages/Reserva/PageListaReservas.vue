@@ -1,7 +1,7 @@
 <template>
     <AuthenticatedLayout>
 
-        <h1 class="text-center" style="font-weight: 100;">Fila de Reservas</h1>
+        <h1 class="text-center" style="font-weight: 100; color: #310740" >Fila de Reservas</h1>
         <InputPesquisaNoBanco :route_dados="'pesquisar_reserva'"
             placeholder="Pesquise por id da reserva, nome do solicitante"></InputPesquisaNoBanco>
         <DadosReserva :reserva="reserva" v-for="(reserva, index) in reservas">
