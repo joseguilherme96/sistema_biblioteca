@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AtendimentoItemReserva;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,7 @@ Route::post('/cadastrar_reserva',[ReservaLivroController::class, 'ReservaLivro']
 Route::get('/lista-reservas', [ReservaLivroController::class, 'selectReserva'])->middleware(['auth', 'verified'])->name('listar_reservas');
 Route::post('/lista-reservas', [ReservaLivroController::class, 'pesquisar'])->middleware(['auth', 'verified'])->name('pesquisar_reserva');
 Route::get('/exibir-reserva/{id}', [ReservaLivroController::class, 'exibirReserva'])->middleware(['auth', 'verified'])->name('exibir_reserva');
+Route::post('/cadastrar_atendimento_item_reserva', [AtendimentoItemReserva::class, 'salvar'])->middleware(['auth', 'verified'])->name('cadastrar_atendimento_item_reserva');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

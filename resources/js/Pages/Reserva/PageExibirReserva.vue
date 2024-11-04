@@ -1,12 +1,12 @@
 <template>
     <AuthenticatedLayout>
-
+        <ModalAtendimentoItensReserva :modalVisible="modal"></ModalAtendimentoItensReserva>
         <DadosReserva :reserva="reserva" v-for="(reserva, index) in reservas">
         </DadosReserva>
 
         <v-table>
             <thead>
-                <tr>
+                <tr style="color: #310740;">
                     <th class="text-left">
                         ID Item
                     </th>
@@ -26,7 +26,7 @@
                     <td>{{ item.livro_id }}</td>
                     <td>{{ item.nome }}</td>
                     <td>{{ item.quantidade_reservada }}</td>
-                    <td>0</td>
+                    <td>{{ item.quantidade_separada ? item.quantidade_separada : 0 }}</td>
                 </tr>
             </tbody>
         </v-table>
@@ -41,8 +41,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Button from '@/Components/Button.vue';
 import DadosReserva from './Partials/DadosReserva.vue';
+import ModalAtendimentoItensReserva from './Partials/ModalAtendimentoItensReserva.vue';
+import { ref } from 'vue'
 
-defineProps({
+const modal = ref({ data: null, exibir: false, title: 'Atendimento Reserva', itens_reservados: null });
+
+const props = defineProps({
 
     reservas: {
 
@@ -52,13 +56,29 @@ defineProps({
     itens: {
         type: Object,
         required: true
+    },
+    auth: {
+        type: Object,
+        required: true
     }
 })
 
-const abrirModalRegistraSaidaEstoque = ()=>{
+const abrirModalRegistraSaidaEstoque = () => {
 
-    //Função que será desenvolvida posteriormente para dar baixa no estoque dos livros separados
+    modal.value.itens_reservados = props.itens;
+
+    //Adiciona atributo checked a cada item da lista de separação
+    //Adiciona id_usuario que está realizando a baixa
+    modal.value.itens_reservados.forEach((linha) => {
+
+        linha.checked = false;
+        linha.id_usuario = props.auth.user.id
+
+    })
+
+    modal.value.exibir = true;
 }
+
 
 
 </script>
