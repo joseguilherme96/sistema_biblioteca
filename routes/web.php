@@ -10,7 +10,9 @@ use App\Http\Controllers\CarrinhoLivro;
 use App\Http\Controllers\EntradaLivroEstoque;
 use App\Http\Controllers\ListaLivroController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\MovimentacaoLivroEstoque;
 use App\Http\Controllers\ReservaLivroController;
+use App\Models\MovimentacaoEstoqueModel;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
@@ -42,6 +44,9 @@ Route::get('/lista-reservas', [ReservaLivroController::class, 'selectReserva'])-
 Route::post('/lista-reservas', [ReservaLivroController::class, 'pesquisar'])->middleware(['auth', 'verified'])->name('pesquisar_reserva');
 Route::get('/exibir-reserva/{id}', [ReservaLivroController::class, 'exibirReserva'])->middleware(['auth', 'verified'])->name('exibir_reserva');
 Route::post('/cadastrar_atendimento_item_reserva', [AtendimentoItemReserva::class, 'salvar'])->middleware(['auth', 'verified'])->name('cadastrar_atendimento_item_reserva');
+
+
+Route::get('/movimentacao-livro-estoque',[MovimentacaoLivroEstoque::class, 'index'])->middleware(['auth', 'verified'])->name('movimentacao_livro_estoque');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

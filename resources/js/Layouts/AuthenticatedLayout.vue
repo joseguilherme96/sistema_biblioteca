@@ -84,6 +84,14 @@ const showingNavigationDropdown = ref(false);
                                                 </NavLink>
                                             </v-list-item-title>
                                         </v-list-item>
+                                        <v-list-item :key="1">
+                                            <v-list-item-title>
+                                                <NavLink :href="route('movimentacao_livro_estoque')"
+                                                    :active="route().current('dashboard')" class="nav-link">
+                                                    Movimentação Estoque
+                                                </NavLink>
+                                            </v-list-item-title>
+                                        </v-list-item>
                                     </v-list>
                                 </v-menu>
                             </li>
