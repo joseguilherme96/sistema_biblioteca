@@ -28,12 +28,14 @@ class MovimentacaoEstoqueModel extends Model
             ->join('estoque', 'movimentacao_estoque.estoque_id', '=', 'estoque.id_estoque')
             ->join('livro', 'estoque.livro_id', '=', 'livro.id')
             ->select(
+                'estoque.id_estoque as ID Estoque',
                 'movimentacao_estoque.id_movimentacao as ID Movimentacao',
                 'motivo_movimentacao_estoque.nome as motivo',
                 'livro.nome as livro',
                 'movimentacao_estoque.quantidade_anterior as Quantidade antes da movimentação',
                 DB::raw('movimentacao_estoque.quantidade_atual - movimentacao_estoque.quantidade_anterior as "Quantidade movimentada"'),
                 'movimentacao_estoque.quantidade_atual as Quantidade depois da movimentação',
+                'movimentacao_estoque.created_at as Data de criação'
             )
             ->orderBy('movimentacao_estoque.id_movimentacao', 'desc');
 

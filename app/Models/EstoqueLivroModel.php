@@ -78,7 +78,7 @@ class EstoqueLivroModel extends Model
             $baixa_estoque = DB::table($this->table);
             $baixa_estoque->where('id_estoque', '=', $value->id_estoque);
 
-            if ($falta_reservar <= $value->quantidade && $falta_reservar > 0) {
+            if ($falta_reservar <= $value->quantidade && $falta_reservar > 0 && $value->quantidade !== 0) {
 
                 $baixa_estoque->decrement('quantidade', $falta_reservar);
 
