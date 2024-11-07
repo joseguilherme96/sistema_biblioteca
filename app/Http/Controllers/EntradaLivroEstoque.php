@@ -8,6 +8,7 @@ use App\Models\LivroModel;
 use Inertia\Inertia;
 use App\Http\Requests\EntradaLivroRequest;
 use App\Models\EstoqueLivroModel;
+use App\Models\MovimentacaoEstoqueModel;
 use Exception;
 
 class EntradaLivroEstoque extends Controller
@@ -42,6 +43,22 @@ class EntradaLivroEstoque extends Controller
             $estoqueLivroModel->endereco_id = $validated['idEndereco'];
             $estoqueLivroModel->quantidade = $validated['quantidade'];
             $estoqueLivroModel->save();
+
+            $id_estoque = $estoqueLivroModel->id;
+
+            //Salva na tabela de movimentação
+            $movimentacaoModel = new MovimentacaoEstoqueModel();
+
+            $movimentacaoModel->insert(
+                [
+                    'motvo_mov_id' => 6,
+                    'estoque_id'=>$id_estoque,
+                    'quantidade_anterior' => 0,
+                    'quantidade_atual' => $estoqueLivroModel->quantidade,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]
+            );
 
             return redirect()->back()->with('success', 'O livro foi cadastrado com sucesso no estoque !');
             

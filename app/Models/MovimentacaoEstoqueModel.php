@@ -32,7 +32,7 @@ class MovimentacaoEstoqueModel extends Model
                 'motivo_movimentacao_estoque.nome as motivo',
                 'livro.nome as livro',
                 'movimentacao_estoque.quantidade_anterior as Quantidade antes da movimentação',
-                DB::raw('movimentacao_estoque.quantidade_anterior - movimentacao_estoque.quantidade_atual as "Quantidade movimentada"'),
+                DB::raw('movimentacao_estoque.quantidade_atual - movimentacao_estoque.quantidade_anterior as "Quantidade movimentada"'),
                 'movimentacao_estoque.quantidade_atual as Quantidade depois da movimentação',
             )
             ->orderBy('movimentacao_estoque.id_movimentacao', 'desc');

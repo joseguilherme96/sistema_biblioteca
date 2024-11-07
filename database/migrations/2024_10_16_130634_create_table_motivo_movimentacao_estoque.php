@@ -59,6 +59,13 @@ return new class extends Migration
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id_motvo_mov'=>6,
+                'nome' => 'Carga Inicial',
+                'descricao' => 'Livros que entram pela primeira vez no estoque',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
     }
 
