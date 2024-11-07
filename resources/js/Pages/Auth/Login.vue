@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { watch } from 'vue';
 
 defineProps({
     canResetPassword: {
@@ -22,6 +23,20 @@ const form = useForm({
     remember: false,
 });
 
+//Escuta mensagem de erro e traduz para o português;
+watch(form, (newValue) => {
+
+    if (newValue.errors.email !== undefined) {
+
+        if (newValue.errors.email == 'These credentials do not match our records.') {
+
+            newValue.errors.email = "Usuário ou senha inválidos !"
+        }
+
+    }
+
+})
+
 const submit = () => {
     form.post(route('login'), {
         onFinish: () => form.reset('password'),
@@ -31,48 +46,58 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-            <Head title="Log in" />
 
-            <div v-if="status" class="mb-4 text-success">
-                {{ status }}
+        <Head title="Log in" />
+
+        <div v-if="status" class="mb-4 text-success">
+            {{ status }}
+        </div>
+        <v-row>
+            <v-col :cols="12" class="d-flex justify-center">
+                <v-img :width="100" :height="100" aspect-ratio="4/3" cover
+                    :src="'http://127.0.0.1:8000/storage/imagens/logo_sistema.png'"></v-img>
+            </v-col>
+        </v-row>
+        <div class="d-flex justify-content-center">
+            <small class="text-center" style="color: #310740;">Sistema de Gestão de Biblioteca</small>
+        </div>
+        <form @submit.prevent="submit">
+            <div class="mb-3 mt-5">
+                <InputLabel for="email" value="Email" style="color:#310740;" />
+
+                <TextInput id="email" type="email" class="form-control" v-model="form.email" required autofocus
+                    autocomplete="username" />
+
+                <InputError class=" mt-2" :message="form.errors.email" style="color:#310740;" />
             </div>
 
-            <form @submit.prevent="submit">
-                <div class="mb-3">
-                    <InputLabel for="email" value="Email" />
+            <div class="mb-3">
+                <InputLabel for="password" value="Password" style="color:#310740;" />
 
-                    <TextInput id="email" type="email" class="form-control" v-model="form.email" required autofocus
-                        autocomplete="username" />
+                <TextInput id="password" type="password" class="form-control" v-model="form.password" required
+                    autocomplete="current-password" />
 
-                    <InputError class="text-danger mt-2" :message="form.errors.email" />
-                </div>
+                <InputError class="mt-2" :message="form.errors.password" style="color:#310740;" />
+            </div>
 
-                <div class="mb-3">
-                    <InputLabel for="password" value="Password" />
+            <div class="form-check mb-3">
+                <label class="form-check-label">
+                    <Checkbox name="remember" v-model:checked="form.remember" class="form-check-input" />
+                    <span style="color:#310740;">Remember me</span>
+                </label>
+            </div>
 
-                    <TextInput id="password" type="password" class="form-control" v-model="form.password" required
-                        autocomplete="current-password" />
+            <div class="d-flex justify-content-end">
+                <Link v-if="canResetPassword" :href="route('password.request')" class="text-decoration-none me-3"
+                    style="color:#310740;">
+                Forgot your password?
+                </Link>
 
-                    <InputError class="text-danger mt-2" :message="form.errors.password" />
-                </div>
-
-                <div class="form-check mb-3">
-                    <label class="form-check-label">
-                        <Checkbox name="remember" v-model:checked="form.remember" class="form-check-input" />
-                        Remember me
-                    </label>
-                </div>
-
-                <div class="d-flex justify-content-end">
-                    <Link v-if="canResetPassword" :href="route('password.request')" class="text-decoration-none me-3">
-                    Forgot your password?
-                    </Link>
-
-                    <PrimaryButton class="btn btn-primary" :class="{ 'disabled': form.processing }"
-                        :disabled="form.processing">
-                        Log in
-                    </PrimaryButton>
-                </div>
-            </form>
+                <PrimaryButton class="btn" style="background-color: #310740;" :class="{ 'disabled': form.processing }"
+                    :disabled="form.processing">
+                    Log in
+                </PrimaryButton>
+            </div>
+        </form>
     </GuestLayout>
 </template>
