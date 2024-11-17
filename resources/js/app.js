@@ -7,9 +7,11 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
 import 'vuetify/styles'
+import '@mdi/font/css/materialdesignicons.css';
 import { createVuetify } from 'vuetify/lib/framework.mjs';
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
 
 const vuetify = createVuetify({
 

@@ -29,7 +29,7 @@ class MovimentacaoEstoqueModel extends Model
             ->join('livro', 'estoque.livro_id', '=', 'livro.id')
             ->select(
                 'estoque.id_estoque as ID Estoque',
-                'movimentacao_estoque.id_movimentacao as ID Movimentacao',
+                'movimentacao_estoque.id_movimentacao',
                 'motivo_movimentacao_estoque.nome as motivo',
                 'livro.nome as livro',
                 'movimentacao_estoque.quantidade_anterior as Quantidade antes da movimentação',
@@ -56,6 +56,10 @@ class MovimentacaoEstoqueModel extends Model
                 if ($key == 'estoque_id') {
 
                     $movimentacaoEstoque->where('estoque_id', $value);
+                }
+
+                if($key == 'ids_movimentacao'){
+                    $movimentacaoEstoque->whereIn('id_movimentacao', $value);
                 }
             }
         }

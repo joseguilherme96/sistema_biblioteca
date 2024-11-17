@@ -47,6 +47,9 @@ Route::post('/cadastrar_atendimento_item_reserva', [AtendimentoItemReserva::clas
 
 
 Route::get('/movimentacao-livro-estoque',[MovimentacaoLivroEstoque::class, 'index'])->middleware(['auth', 'verified'])->name('movimentacao_livro_estoque');
+Route::get('/impressao-movimentacao-livro-estoque',[MovimentacaoLivroEstoque::class, 'imprimiMovimentacao'])->middleware(['auth', 'verified'])->name('impressao_movimentacao_livro_estoque');
+Route::post('/impressao-movimentacao-livro-estoque',[MovimentacaoLivroEstoque::class, 'imprimiMovimentacao'])->middleware(['auth', 'verified'])->name('impressao_movimentacao_livro_estoque');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

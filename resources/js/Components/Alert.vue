@@ -9,9 +9,9 @@
                         <v-card>
                             <Toolbar :data="{ title: dialogVisible.title }"></Toolbar>
                             <v-row class="justify-center mt-5">
-                                <v-icon color="#5EA9AE" icon="mdi-alert" size="x-large"
+                                <v-icon color="#310740" icon="mdi-alert" size="x-large"
                                     v-show="dialogVisible.status !== 'success'"></v-icon>
-                                <v-icon color="#5EA9AE" icon="mdi-check-circle" size="x-large"
+                                <v-icon color="#310740" icon="mdi-check-circle" size="x-large"
                                     v-show="dialogVisible.status !== 'error'"></v-icon>
                             </v-row>
                             <v-card-text class="text-h6 pa-12 text-center">
