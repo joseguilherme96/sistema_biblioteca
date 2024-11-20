@@ -54,8 +54,8 @@ const submit = () => {
         </div>
         <v-row>
             <v-col :cols="12" class="d-flex justify-center">
-                <v-img :width="100" :height="100" aspect-ratio="4/3" cover
-                    :src="'http://127.0.0.1:8000/storage/imagens/logo_sistema.png'"></v-img>
+                <v-img :width="200" :height="200" aspect-ratio="1/1" 
+                :src="'http://127.0.0.1:8000/storage/imagens/logo_sistema.png'"></v-img>
             </v-col>
         </v-row>
         <div class="d-flex justify-content-center">
@@ -90,7 +90,7 @@ const submit = () => {
             <div class="d-flex justify-content-end">
                 <Link v-if="canResetPassword" :href="route('password.request')" class="text-decoration-none me-3"
                     style="color:#310740;">
-                Forgot your password?
+                Esqueceu a senha?
                 </Link>
 
                 <PrimaryButton class="btn" style="background-color: #310740;" :class="{ 'disabled': form.processing }"
