@@ -87,13 +87,21 @@ class ReservaLivroModel extends Model
                         } else if (count($data) == 1) {
                             $value = $data[0];
                         }
-                    }
 
-                    $reserva->where('id_reserva_livro', '=', "" . $value . "");
-                    $reserva->orWhere('users.name', 'like', "" . $value . "%");
-                    $reserva->orWhere('status.descricao', 'like', "" . $value . "%");
-                    $reserva->orWhere('reserva_livro.created_at', 'like', "" . $value . "%");
-                    $reserva->orWhere('reserva_livro.created_at', 'like', "%" . $value . "%");
+                        $reserva->orWhere('reserva_livro.created_at', 'like', "%" . $value . "%");
+                        
+                    } else {
+
+                        if (is_numeric($value)) {
+
+                            $reserva->where('reserva_livro.id_reserva_livro', '=', "" . $value . "");
+                        } else {
+
+                            $reserva->orWhere('users.name', 'like', "" . $value . "%");
+                            $reserva->orWhere('status.descricao', 'like', "" . $value . "%");
+                            $reserva->orWhere('reserva_livro.created_at', 'like', "%" . $value . "%");
+                        }
+                    }
                 }
             }
         }

@@ -10,15 +10,15 @@
                             <Toolbar :data="{ title: dialogVisible.title }"></Toolbar>
                             <v-row class="justify-center mt-5">
                                 <v-icon color="#310740" icon="mdi-alert" size="x-large"
-                                    v-show="dialogVisible.status !== 'success'"></v-icon>
+                                    v-show="dialogVisible.status == 'error'"></v-icon>
                                 <v-icon color="#310740" icon="mdi-check-circle" size="x-large"
-                                    v-show="dialogVisible.status !== 'error'"></v-icon>
+                                    v-show="dialogVisible.status == 'success'"></v-icon>
                             </v-row>
                             <v-card-text class="text-h6 pa-12 text-center">
                                 {{ dialogVisible.message }}
                             </v-card-text>
                             <template v-slot:actions>
-                                <v-btn variant="flat"  color="#310740" class="ml-auto" text="Close" @click="dialogVisible.exibir = false"></v-btn>
+                                <v-btn variant="flat"  color="#310740" class="ml-auto" text="Fechar" @click="dialogVisible.exibir = false"></v-btn>
                             </template>
                         </v-card>
                     </template>

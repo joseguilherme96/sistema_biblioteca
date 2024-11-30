@@ -9,7 +9,7 @@
                             <Toolbar :data="{ title: modalVisible.title }"></Toolbar>
                             <FormLivro :dadosLivroEditar="modalVisible.livro"></FormLivro>
                             <template v-slot:actions>
-                                <v-btn variant="flat"  color="#310740" class="ml-auto" text="Close" @click="modalVisible.exibir = false"></v-btn>
+                                <v-btn variant="flat"  color="#310740" class="ml-auto" text="Fechar" @click="modalVisible.exibir = false"></v-btn>
                             </template>
                         </v-card>
                     </template>

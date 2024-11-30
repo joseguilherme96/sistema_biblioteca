@@ -48,6 +48,7 @@ const reservar = (livro) => {
     livrosCarrinho.value.push(livro)
     localStorage.setItem('livrosCarrinho', JSON.stringify(livrosCarrinho.value))
 
+    mensagem.value.status = "success";
     mensagem.value.exibir = true;
 
 

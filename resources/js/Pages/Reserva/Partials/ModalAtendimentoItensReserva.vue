@@ -44,7 +44,7 @@
                             <template v-slot:actions>
                                 <v-btn variant="flat" color="#310740" text="CADASTRAR BAIXA"
                                     @click="cadastrarBaixa"></v-btn>
-                                <v-btn variant="flat" color="#310740" text="Close"
+                                <v-btn variant="flat" color="#310740" text="Fechar"
                                     @click="modalVisible.exibir = false"></v-btn>
                             </template>
                         </v-card>

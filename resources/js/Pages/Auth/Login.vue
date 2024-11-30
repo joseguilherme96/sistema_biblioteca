@@ -83,7 +83,7 @@ const submit = () => {
             <div class="form-check mb-3">
                 <label class="form-check-label">
                     <Checkbox name="remember" v-model:checked="form.remember" class="form-check-input" />
-                    <span style="color:#310740;">Remember me</span>
+                    <span style="color:#310740;">Lembrar senha</span>
                 </label>
             </div>
 

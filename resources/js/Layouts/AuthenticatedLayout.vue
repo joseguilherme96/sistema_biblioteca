@@ -127,9 +127,9 @@ const showingNavigationDropdown = ref(false);
                                 </template>
 
                                 <template #content>
-                                    <DropdownLink :href="route('profile.edit')">Profile</DropdownLink>
+                                    <DropdownLink :href="route('profile.edit')">Perfil</DropdownLink>
                                     <DropdownLink :href="route('logout')" method="post" as="button">
-                                        Log Out
+                                        Sair
                                     </DropdownLink>
                                 </template>
                             </Dropdown>
@@ -158,8 +158,8 @@ const showingNavigationDropdown = ref(false);
                             <p class="text-muted">{{ $page.props.auth.user.email }}</p>
                         </div>
 
-                        <ResponsiveNavLink :href="route('profile.edit')">Profile</ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('logout')" method="post" as="button">Log Out</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('profile.edit')">Perfil</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('logout')" method="post" as="button">Sair</ResponsiveNavLink>
                     </div>
                 </div>
             </div>

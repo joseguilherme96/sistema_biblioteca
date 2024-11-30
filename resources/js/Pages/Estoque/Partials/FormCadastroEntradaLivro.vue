@@ -102,7 +102,7 @@ const submit = (form) => {
 
 const nomeLivroRules = [
     value => {
-        if (value?.length >= 3 && value?.length <= 30) return true
+        if (value?.length >= 3 && value?.length <= 100) return true
 
         return 'O quantidade de caracteres do campo deve ser maior ou igual a 3 e menor igual a 30'
     },
