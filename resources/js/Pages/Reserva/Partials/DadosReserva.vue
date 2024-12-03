@@ -1,6 +1,6 @@
 <template>
 
-    <v-card color="#708090" class="mt-5 mb-3" max-width="1300" outlined>
+    <v-card color="#310740" class="mt-5 mb-3" max-width="1300" outlined>
         <v-card-title class="d-flex justify-space-between">
             <span class="text-h6">Reserva Nº {{ reserva.id_reserva_livro }}</span>
             <v-chip v-if="reserva.status" color="#006400" label small class="ml-2" style="color: white;">

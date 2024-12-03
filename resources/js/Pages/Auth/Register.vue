@@ -11,6 +11,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    nivel_acesso_id: '',
 });
 
 const submit = () => {
@@ -26,7 +27,7 @@ const submit = () => {
         <div class="container mt-5">
             <form @submit.prevent="submit">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
+                    <label for="name" class="form-label" style="color: #310740;">Nome</label>
                     <input
                         id="name"
                         type="text"
@@ -41,7 +42,7 @@ const submit = () => {
                     </div>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3" style="color: #310740;">
                     <label for="email" class="form-label">Email</label>
                     <input
                         id="email"
@@ -57,7 +58,7 @@ const submit = () => {
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label" style="color: #310740;">Senha</label>
                     <input
                         id="password"
                         type="password"
@@ -72,7 +73,7 @@ const submit = () => {
                 </div>
 
                 <div class="mb-3">
-                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                    <label for="password_confirmation" class="form-label">Confirmar senha</label>
                     <input
                         id="password_confirmation"
                         type="password"
@@ -86,21 +87,31 @@ const submit = () => {
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center">
+                <!--nivel de acesso-->
+                <label style="color: #310740;">Nivel Acesso</label>
+                <select class="form-select" aria-label="Default select example" v-model="form.nivel_acesso_id">
+                    <option selected disabled>Selecione uma opção</option>
+                    <option value="1">Master</option>
+                    <option value="2">Aluno</option>
+                    <option value="3">Professor</option>
+                </select>
+
+                <div class="d-flex justify-content-between align-items-center mt-5">
                     <Link
                         :href="route('login')"
                         class="btn btn-link"
                     >
-                        Already registered?
+                        Já está registrado ?
                     </Link>
 
                     <button
                         type="submit"
+                        style="background-color: #310740; color:white"
                         class="btn btn-primary"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                     >
-                        Register
+                        CADASTRAR
                     </button>
                 </div>
             </form>
