@@ -13,6 +13,7 @@ use App\Http\Controllers\LivroController;
 use App\Http\Controllers\MovimentacaoLivroEstoque;
 use App\Http\Controllers\ReservaLivroController;
 use App\Models\MovimentacaoEstoqueModel;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
@@ -24,6 +25,8 @@ Route::get('/dashboard', function () {
 //Rotas apenas para usuários Masters - Usuários Tipo 1
 Route::middleware(['auth', 'verified', 'verificar-usuario-tipo-1'])->group(function () {
 
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('register', [RegisteredUserController::class, 'store']);
     Route::get('/movimentacao-livro-estoque', [MovimentacaoLivroEstoque::class, 'index'])->name('movimentacao_livro_estoque');
     Route::get('/impressao-movimentacao-livro-estoque', [MovimentacaoLivroEstoque::class, 'imprimiMovimentacao'])->name('impressao_movimentacao_livro_estoque');
     Route::post('/impressao-movimentacao-livro-estoque', [MovimentacaoLivroEstoque::class, 'imprimiMovimentacao'])->name('impressao_movimentacao_livro_estoque');
