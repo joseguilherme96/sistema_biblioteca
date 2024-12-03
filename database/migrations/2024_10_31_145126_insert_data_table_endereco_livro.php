@@ -44,6 +44,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::delete('endereco_livro');
+        Schema::table('endereco_livro', function (Blueprint $table) {
+            Schema::dropIfExists('endereco_livro');
+        });
     }
 };
