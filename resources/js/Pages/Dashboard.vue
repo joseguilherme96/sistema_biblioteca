@@ -56,11 +56,11 @@ watchEffect(() => {
                     </template>
 
                     <template #content>
-                        <div style="background-color: #310740; color: white;">
-                            <DropdownLink :href="route('profile.edit')">Profile</DropdownLink>
+                        <div>
+                            <DropdownLink :href="route('profile.edit')">Perfil</DropdownLink>
                             <DropdownLink :href="route('logout')" method="post" as="button"
-                                style="background-color: #310740; color: white;">
-                                Log Out
+                                style="color: 310740;">
+                                Sair
                             </DropdownLink>
                         </div>
                     </template>

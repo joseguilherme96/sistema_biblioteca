@@ -12,13 +12,16 @@ defineProps({
     status: {
         type: String,
     },
+    auth:{
+        type: Object
+    }
 });
 </script>
 
 <template>
     <Head title="Profile" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :auth="auth">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="color: #310740;">Perfil</h2>
         </template>
