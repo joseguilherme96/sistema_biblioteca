@@ -1,6 +1,6 @@
 <template>
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :auth="auth">
         <Alert :dialogVisible="mensagem"></Alert>
         <v-row v-for="(livro, index) in livrosCarrinho">
             <v-col cols="12">
@@ -72,12 +72,16 @@ const separaDadosParaFinalizarReserva = () => {
 
         form.livrosReserva = livros;
 
+        return true;
+
     } else {
 
         mensagem.value.status = "error";
         mensagem.value.message = `A reserva não pode ser finalizada pois o carrinho ainda está vazio !`;
         mensagem.value.title = "Aviso";
         mensagem.value.exibir = true;
+
+        return false;
 
     }
 }
@@ -117,7 +121,10 @@ const submit = () => {
 
 const finalizarReserva = () => {
 
-    separaDadosParaFinalizarReserva();
+    if(!separaDadosParaFinalizarReserva()){
+
+        return;
+    }
 
     submit();
 

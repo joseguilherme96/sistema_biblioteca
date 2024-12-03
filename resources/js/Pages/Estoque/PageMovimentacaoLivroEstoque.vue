@@ -1,5 +1,5 @@
 <template>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :auth="auth">
         <Alert :dialogVisible="mensagem"></Alert>
         <h1 class="text-center" style="font-weight: 100; color: #310740">Relatório de Movimentação Estoque</h1>
         <v-data-table :items="movimentacoes" :fixed-header="true" :hover="true" show-select
@@ -25,6 +25,9 @@ const props = defineProps({
 
         type: Object,
         required: true
+    },
+    auth: {
+        type: Object
     }
 
 })

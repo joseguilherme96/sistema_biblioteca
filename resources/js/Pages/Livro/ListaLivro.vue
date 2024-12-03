@@ -1,5 +1,5 @@
 <template>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :auth="auth" @permissoes="(value)=>setPermissoes(value)">
         <ModalEditarLivro :modalVisible="modal"></ModalEditarLivro>
         <Alert :dialogVisible="mensagem"></Alert>
         <v-sheet class="mx-auto m-5" width="900">
@@ -12,8 +12,8 @@
                         <v-chip color="red" text-color="white" v-show="livro.qtd_lvro_estqe == 0"
                             rounded="1">Indisponível</v-chip>
                         <v-btn variant="flat" color="#310740" class="m-1"
-                            @click="abrirModalEditarLivro(livro)">Editar</v-btn>
-                        <v-btn variant="flat" color="#310740" class="m-1" @click="deletarLivro">Deletar</v-btn>
+                            @click="abrirModalEditarLivro(livro)" v-show="permissoes.livros.editar">Editar</v-btn>
+                        <v-btn variant="flat" color="#310740" class="m-1" @click="deletarLivro" v-show="permissoes.livros.deletar">Deletar</v-btn>
                     </CardLivro>
                 </v-col>
             </v-row>
@@ -36,6 +36,11 @@ const mensagem = ref({message:'O livro foi adicionado ao carrinho com sucesso !'
 defineProps({
 
     livros: {
+
+        type: Object
+        
+    },
+    auth: {
 
         type: Object
     }
@@ -61,6 +66,8 @@ const abrirModalEditarLivro = (livro) => {
 
 }
 
+const permissoes = ref({});
+
 const deletarLivro = () => {
     //Função que será desenvolvida posteriormente para deletar o livro
 }
@@ -74,6 +81,12 @@ onMounted(() => {
 
 
 })
+
+const setPermissoes = (value)=>{
+
+    permissoes.value = value;
+
+}
 
 
 </script>

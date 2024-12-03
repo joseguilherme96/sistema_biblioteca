@@ -1,5 +1,5 @@
 <template>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :auth="auth">
 
         <Head title="Entrada" />
         <div class="container text-end">
@@ -34,6 +34,11 @@ const props = defineProps({
     errors: {
 
         type: Object
+    },
+    auth: {
+
+        type: Object
+
     }
 
 })

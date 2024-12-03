@@ -1,5 +1,5 @@
 <template>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :auth="auth">
         <ModalAtendimentoItensReserva :modalVisible="modal"></ModalAtendimentoItensReserva>
         <DadosReserva :reserva="reserva" v-for="(reserva, index) in reservas">
         </DadosReserva>

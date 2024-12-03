@@ -12,7 +12,7 @@ defineProps({
     <v-card variant="text" class="mt-5 rounded" v-if="data.exibir"
         style="border: #310740 solid 1px; background-color: #310740; width: 400px; height: 300px; overflow: hidden;">
     <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%;">
-        <Link :href="route(`${data.route}`)" style="text-decoration: none; color: white;">
+        <Link :href="route(`${data.route ? data.route : 'dashboard'}`)" style="text-decoration: none; color: white;">
             <div  class="text-center">
                 <div class="icon-wrapper mb-5 mx-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#310740"

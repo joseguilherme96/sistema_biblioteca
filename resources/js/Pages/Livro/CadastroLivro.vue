@@ -8,10 +8,20 @@ import TextInput from '@/Components/TextInput.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import { useForm } from '@inertiajs/vue3';
 import FormLivro from './Partials/FormLivro.vue';
+
+defineProps({
+
+    auth: {
+
+        type: Object
+    }
+
+})
+
 </script>
 
 <template>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :auth="auth">
 
         <Head title="Home" />
         <div class="container text-end">

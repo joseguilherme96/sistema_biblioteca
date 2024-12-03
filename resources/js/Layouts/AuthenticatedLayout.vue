@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -8,6 +8,58 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
+
+const props = defineProps({
+    auth: Object
+})
+
+const emits = defineEmits({
+
+    permissoes: Object
+
+})
+
+let permissoes = ref({
+
+    estoque: {
+        entrada: false,
+        movimentacao_estoque: false
+    },
+    livros: {
+        cadastro: false,
+        lista: false
+    }
+
+
+})
+
+const verificaPermissoesDoUsuario =()=>{
+    
+    permissoes = {
+        estoque: {
+            entrada: [1,3].includes(props.auth.user.nivel_acesso_id),
+            movimentacao_estoque: [1].includes(props.auth.user.nivel_acesso_id),
+        },
+        reserva: {
+            lista_reservas:[1].includes(props.auth.user.nivel_acesso_id),
+            cadastro_reservas:[1,3].includes(props.auth.user.nivel_acesso_id),
+        },
+        livros: {
+            cadastro: [1,3].includes(props.auth.user.nivel_acesso_id),
+            lista: [1,2,3].includes(props.auth.user.nivel_acesso_id),
+            editar:[1,3].includes(props.auth.user.nivel_acesso_id),
+            deletar:[1,3].includes(props.auth.user.nivel_acesso_id)
+        },
+    }
+
+    emits('permissoes', permissoes)
+
+}
+
+watchEffect(() => {
+    verificaPermissoesDoUsuario();
+})
+
 </script>
 
 <template>
@@ -41,7 +93,7 @@ const showingNavigationDropdown = ref(false);
                                     </template>
                                 </v-menu>
                             </li>
-                            <li class="mr-5  mt-1">
+                            <li class="mr-5  mt-1" v-show="permissoes.livros.cadastro || permissoes.livros.lista">
                                 <v-menu open-on-hover>
                                     <template v-slot:activator="{ props }">
                                         <v-btn color="#310740" v-bind="props">
@@ -52,7 +104,7 @@ const showingNavigationDropdown = ref(false);
                                         <v-list-item :key="0">
                                             <v-list-item-title>
                                                 <NavLink :href="route('cadastro-livro')"
-                                                    :active="route().current('dashboard')" class="nav-link">
+                                                    :active="route().current('dashboard')" class="nav-link" v-show="permissoes.livros.cadastro">
                                                     Cadastro
                                                 </NavLink>
                                             </v-list-item-title>
@@ -60,7 +112,7 @@ const showingNavigationDropdown = ref(false);
                                         <v-list-item :key="1">
                                             <v-list-item-title>
                                                 <NavLink :href="route('lista_livro')"
-                                                    :active="route().current('dashboard')" class="nav-link">
+                                                    :active="route().current('dashboard')" class="nav-link" v-show="permissoes.livros.lista">
                                                     Lista
                                                 </NavLink>
                                             </v-list-item-title>
@@ -68,7 +120,7 @@ const showingNavigationDropdown = ref(false);
                                     </v-list>
                                 </v-menu>
                             </li>
-                            <li class="mr-5  mt-1">
+                            <li class="mr-5  mt-1" v-show="permissoes.estoque.entrada || permissoes.estoque.movimentacao_estoque">
                                 <v-menu open-on-hover>
                                     <template v-slot:activator="{ props }">
                                         <v-btn color="#310740" v-bind="props">
@@ -76,7 +128,7 @@ const showingNavigationDropdown = ref(false);
                                         </v-btn>
                                     </template>
                                     <v-list>
-                                        <v-list-item :key="0">
+                                        <v-list-item :key="0" v-show="permissoes.estoque.entrada">
                                             <v-list-item-title>
                                                 <NavLink :href="route('cadastro-entrada-livro')"
                                                     :active="route().current('dashboard')" class="nav-link">
@@ -84,7 +136,7 @@ const showingNavigationDropdown = ref(false);
                                                 </NavLink>
                                             </v-list-item-title>
                                         </v-list-item>
-                                        <v-list-item :key="1">
+                                        <v-list-item :key="1" v-show="permissoes.estoque.movimentacao_estoque">
                                             <v-list-item-title>
                                                 <NavLink :href="route('movimentacao_livro_estoque')"
                                                     :active="route().current('dashboard')" class="nav-link">
@@ -95,7 +147,7 @@ const showingNavigationDropdown = ref(false);
                                     </v-list>
                                 </v-menu>
                             </li>
-                            <li class="mr-5  mt-1">
+                            <li class="mr-5  mt-1" v-show="permissoes.reserva.lista_reservas">
                                 <v-menu open-on-hover>
                                     <template v-slot:activator="{ props }">
                                         <v-btn color="#310740" v-bind="props">
@@ -103,7 +155,7 @@ const showingNavigationDropdown = ref(false);
                                         </v-btn>
                                     </template>
                                     <v-list>
-                                        <v-list-item :key="0">
+                                        <v-list-item :key="0" v-show="permissoes.reserva.lista_reservas">
                                             <v-list-item-title>
                                                 <NavLink :href="route('listar_reservas')"
                                                     :active="route().current('dashboard')" class="nav-link">
