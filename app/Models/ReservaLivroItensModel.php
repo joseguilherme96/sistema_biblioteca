@@ -26,8 +26,10 @@ class ReservaLivroItensModel extends Model
 
         $reservaLivroItens = DB::table($this->table)
             ->join('livro', 'reserva_livro_itens.livro_id', '=', 'livro.id')
-            ->join('atendimento_item_reservado', 'reserva_livro_itens.id_item_reserva', '=', 'atendimento_item_reservado.item_reserv_id','left')
-            ->select('livro.*','reserva_livro_itens.*','atendimento_item_reservado.quantidade_separada');
+            ->join('estoque', 'reserva_livro_itens.estoque_id', '=', 'estoque.id_estoque')
+            ->join('endereco_livro', 'estoque.endereco_id','=','endereco_livro.id_endereco')
+            ->join('atendimento_item_reservado', 'reserva_livro_itens.id_item_reserva', '=', 'atendimento_item_reservado.item_reserv_id', 'left')
+            ->select('livro.*', 'reserva_livro_itens.*', 'atendimento_item_reservado.quantidade_separada','endereco_livro.descricao as endereco');
 
 
         if (!empty($where)) {

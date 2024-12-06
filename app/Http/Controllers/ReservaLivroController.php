@@ -76,6 +76,7 @@ class ReservaLivroController extends Controller
                 $reservaLivroItensModel->reserva_id = $livrosAReservar['id_reserva'];
                 $reservaLivroItensModel->livro_id = $livro['id_livro'];
                 $reservaLivroItensModel->quantidade_reservada = $livro['quantidade'];
+                $reservaLivroItensModel->estoque_id = $livro['id_estoque'];
 
                 $reservaLivroItensModel->save();
             }
@@ -93,13 +94,15 @@ class ReservaLivroController extends Controller
 
         try {
 
-            foreach ($livrosAReservar['livrosReserva'] as $livro) {
+            foreach ($livrosAReservar['livrosReserva'] as &$livro) {
 
                 $estoqueLivroModel = new EstoqueLivroModel();
 
                 $where['livro_id'] = $livro['id_livro'];
                 $id_motivo = 1; //Motivo da baixa reserva 1 = reserva
                 $baixa_estoque = $estoqueLivroModel->baixaQuantidadeNoEstoque($where, $livro['quantidade'], $id_motivo);
+
+                $livro['id_estoque'] = $baixa_estoque['id_estoque'];
 
                 array_push($returns, $baixa_estoque);
             }
@@ -113,9 +116,11 @@ class ReservaLivroController extends Controller
 
             if (!$return['status']) {
 
-                return false;
+                return ['status' => false, 'message' => 'Falha ao dar baixa no estoque !'];
             }
         }
+
+        return $livrosAReservar;
     }
 
     public function ReservaLivro(Request $request)
@@ -125,6 +130,15 @@ class ReservaLivroController extends Controller
 
         //Valida itens para reserva
         $this->validacaoItensParaReserva($livrosAReservar);
+
+        //Baixa estoque
+        $livrosAReservar = $this->baixaLivroEstoque($livrosAReservar);
+
+        if (isset($livrosAReservar['status'])) {
+
+            redirect()->back()->with('error', "Falha ao cadastrar baixa no estoque !");
+
+        }
 
         //Cria reserva
         $id_reserva = $this->criaReserva($livrosAReservar);
@@ -141,13 +155,6 @@ class ReservaLivroController extends Controller
             redirect()->back()->with('error', 'Falha ao cadastrar itens reserva !');
         }
 
-        //Baixa estoque
-        $baixa_estoque = $this->baixaLivroEstoque($livrosAReservar);
-
-        if (!$baixa_estoque) {
-
-            redirect()->back()->with('error', "Falha ao cadastrar baixa no estoque !");
-        }
 
         redirect()->back()->with('success', "A reserva N° $id_reserva foi criada com sucesso !");
     }

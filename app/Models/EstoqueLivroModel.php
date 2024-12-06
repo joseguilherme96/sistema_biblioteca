@@ -71,6 +71,7 @@ class EstoqueLivroModel extends Model
         $result = $estoque->get();
 
         $falta_reservar = $quantidade;
+        $id_estoque = null;
 
         //Processa baixa no estoque de acordo com a primeiro produto encontrado para baixa
         foreach ($result as $value) {
@@ -82,12 +83,13 @@ class EstoqueLivroModel extends Model
 
                 $baixa_estoque->decrement('quantidade', $falta_reservar);
 
+                $id_estoque = $value->id_estoque;
 
                 //Registra movimento do estoque
                 $movimentacaoEstoqueModel->insert(
                     [
                         'motvo_mov_id' => $id_motivo,
-                        'estoque_id'=>$value->id_estoque,
+                        'estoque_id' => $value->id_estoque,
                         'quantidade_anterior' => $value->quantidade,
                         'quantidade_atual' => $value->quantidade - $falta_reservar,
                         'created_at' => now(),
@@ -101,31 +103,33 @@ class EstoqueLivroModel extends Model
 
                 $baixa_estoque->decrement('quantidade', $value->quantidade);
 
+                $id_estoque = $value->id_estoque;
+
                 //Registra movimento do estoque
                 $movimentacaoEstoqueModel->insert(
                     [
                         'motvo_mov_id' => $id_motivo,
-                        'estoque_id'=>$value->id_estoque,
+                        'estoque_id' => $value->id_estoque,
                         'quantidade_anterior' => $value->quantidade,
                         'quantidade_atual' => 0,
                         'created_at' => now(),
                         'updated_at' => now()
                     ]
                 );
-                
+
                 $falta_reservar  = $falta_reservar - $value->quantidade;
             }
         }
 
         if ($falta_reservar == $quantidade) {
 
-            return ['status' => false, 'message' => "Falha ao dar baixa no estoque, livro sem saldo no estoque !"];
+            return ['status' => false, 'message' => "Falha ao dar baixa no estoque, livro sem saldo no estoque !",'id_estoque' => $id_estoque];
         } else if ($falta_reservar > 0 && $falta_reservar !== $quantidade) {
 
-            return ['status' => false, 'message' => "Os livros foram reservados parciais !"];
+            return ['status' => false, 'message' => "Os livros foram reservados parciais !", 'id_estoque' => $id_estoque];
         } else if ($falta_reservar == 0) {
 
-            return ['status' => true, 'message' => "Livro baixado no estoque com sucesso !"];
+            return ['status' => true, 'message' => "Livro baixado no estoque com sucesso !", 'id_estoque' => $id_estoque];
         }
     }
 }

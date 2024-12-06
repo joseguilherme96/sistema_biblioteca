@@ -14,6 +14,9 @@
                         Livro
                     </th>
                     <th class="text-left">
+                       Endereço
+                    </th>
+                    <th class="text-left">
                         Quantidade Solicitada
                     </th>
                     <th class="text-left">
@@ -25,6 +28,7 @@
                 <tr v-for="item in itens" :key="item.name">
                     <td>{{ item.livro_id }}</td>
                     <td>{{ item.nome }}</td>
+                    <td>{{ item.endereco }}</td>
                     <td>{{ item.quantidade_reservada }}</td>
                     <td>{{ item.quantidade_separada ? item.quantidade_separada : 0 }}</td>
                 </tr>
