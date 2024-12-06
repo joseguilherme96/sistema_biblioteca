@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, watchEffect } from 'vue';
+import { ref, watch, watchEffect,onMounted } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -60,7 +60,16 @@ watchEffect(() => {
     verificaPermissoesDoUsuario();
 })
 
+
 </script>
+<style>
+
+.hover-usuario-carrinho:hover{
+
+    background-color: #310740;
+}
+
+</style>
 
 <template>
     <div>
@@ -173,7 +182,7 @@ watchEffect(() => {
                         <div class="d-flex align-items-center">
                             <Dropdown align="right">
                                 <template #trigger>
-                                    <button class="btn btn-outline-secondary dropdown-toggle">
+                                    <button class="btn btn-outline-secondary dropdown-toggle hover-usuario-carrinho">
                                         {{ $page.props.auth.user.name }}
                                     </button>
                                 </template>
@@ -186,7 +195,7 @@ watchEffect(() => {
                                 </template>
                             </Dropdown>
                         </div>
-                        <button class="ml-2 btn btn-outline-secondary">
+                        <button class="ml-2 btn btn-outline-secondary hover-usuario-carrinho">
                             <NavLink :href="route('carrinho_livro')" :active="route().current('dashboard')"
                                 class="nav-link">
                                 Carrinho

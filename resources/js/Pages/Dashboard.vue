@@ -50,7 +50,7 @@ watchEffect(() => {
             <div class="col-2 text-center">
                 <Dropdown>
                     <template #trigger>
-                        <button class="btn btn-outline-secondary dropdown-toggle" style="background-color: #310740;">
+                        <button class="btn btn-outline-secondary dropdown-toggle" style="background-color: #310740; color:white">
                             <span class="color:white">{{ $page.props.auth.user.name }}</span>
                         </button>
                     </template>
