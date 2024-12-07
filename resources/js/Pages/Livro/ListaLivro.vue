@@ -15,8 +15,7 @@
                                     <v-chip color="red" text-color="white" v-show="livro.qtd_lvro_estqe == 0"
                                         rounded="1" class="ml-5">Indisponível</v-chip>
                                 </div>
-                                <div v-if="permissoes.livros.editar && permissoes.livros.deletar"
-                                    class="d-inline col-2 mr-5">
+                                <div class="d-inline col-2 mr-5">
                                     <v-icon left small color="#310740" @click="livro.exibirBotoesExtras = true"
                                         v-show="livro.exibirBotoesExtras != true">mdi-chevron-down</v-icon>
                                     <v-icon left small color="#310740" @click="livro.exibirBotoesExtras = false"
@@ -26,9 +25,9 @@
                         </div>
                         <div class="d-block m-1">
                             <v-btn variant="flat" color="#310740" class="m-1" @click="abrirModalEditarLivro(livro)"
-                                v-show="permissoes.livros.editar && livro.exibirBotoesExtras">Editar</v-btn>
+                                v-show="livro.exibirBotoesExtras" :disabled="!permissoes.livros.editar">Editar</v-btn>
                             <v-btn variant="flat" color="#310740" class="m-1" @click="deletarLivro"
-                                v-show="permissoes.livros.deletar && livro.exibirBotoesExtras">Deletar</v-btn>
+                                v-show="livro.exibirBotoesExtras" :disabled="!permissoes.livros.deletar">Deletar</v-btn>
                         </div>
                     </CardLivro>
                 </v-col>
