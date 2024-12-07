@@ -41,8 +41,9 @@ class ReservaLivroModel extends Model
 
         $reserva = DB::table($this->table)
             ->join('users', 'users.id', '=', 'reserva_livro.user_id')
+            ->join('nivel_acesso','users.nivel_acesso_id','=','nivel_acesso.id_nivel_acesso')
             ->join('status', 'status.id_status', '=', 'reserva_livro.status_id')
-            ->select('reserva_livro.*', 'users.name', 'status.descricao as status')
+            ->select('reserva_livro.*', 'users.name', 'status.descricao as status','nivel_acesso.nome_nivel_acesso')
             ->orderBy('reserva_livro.id_reserva_livro', 'desc');
 
         if (!empty($where)) {

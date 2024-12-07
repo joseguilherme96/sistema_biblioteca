@@ -11,7 +11,9 @@
         <v-card-subtitle class="text-subtitle-1 mb-2">
             Solicitante: <strong >{{ reserva.name }}</strong>
         </v-card-subtitle>
-
+        <v-card-subtitle class="text-subtitle-1 mb-2">
+            Tipo Usuário: <strong>{{ reserva.nome_nivel_acesso }}</strong>
+        </v-card-subtitle>
         <v-card-text class="text-body-2" style="height: 100px; overflow-y: hidden;">
             <v-row>
                 <v-icon left small color="grey darken-1">mdi-calendar-clock</v-icon>

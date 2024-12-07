@@ -23,17 +23,17 @@ return new class extends Migration
         $nivelAcessoModel->insert([
             [
                 'id_nivel_acesso'=>1,
-                'nome_nivel_acesso' => 'Tipo 1',
+                'nome_nivel_acesso' => 'Master',
                 'descricao_nivel_acesso' => 'Usuário master, que acessa todos os recursos do sistema'
             ],
             [
                 'id_nivel_acesso'=>2,
-                'nome_nivel_acesso' => 'Tipo 2',
+                'nome_nivel_acesso' => 'Aluno',
                 'descricao_nivel_acesso' => 'Usuários communs que acessa apenas recursos do sistema que permite realizar reservar livros.'
             ],
             [
                 'id_nivel_acesso'=>3,
-                'nome_nivel_acesso' => 'Tipo 3',
+                'nome_nivel_acesso' => 'Professor',
                 'descricao_nivel_acesso' => 'Usuários do sistema que podem apenas acessar telas de cadastro e realizar reservas.'
             ]
         ]);
