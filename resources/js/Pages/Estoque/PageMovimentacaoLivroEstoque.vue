@@ -41,15 +41,15 @@ onMounted(() => {
     //Aplicando cor na quantidade, caso seja uma saida
     document.querySelectorAll('.v-data-table__tr').forEach((linha) => {
 
-        let quantidade_movimentada = linha.children[6].innerHTML;
+        let quantidade_movimentada = linha.children[7].innerHTML;
 
         if (quantidade_movimentada < 0) {
 
-            linha.children[6].style.color = "red";
+            linha.children[7].style.color = "red";
 
         } else {
 
-            linha.children[6].style.color = "green";
+            linha.children[7].style.color = "green";
 
         }
 

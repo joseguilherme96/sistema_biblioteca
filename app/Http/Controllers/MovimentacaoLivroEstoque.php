@@ -38,8 +38,9 @@ class MovimentacaoLivroEstoque extends Controller
             <tr>
                 <th width="7%" align="center">ID Estoque</th>
                 <th width="10%" align="center">ID Movimentação</th>
-                <th width="20%" align="center">Motivo</th>
+                <th width="10%" align="center">Motivo</th>
                 <th width="20%" align="center">Livro</th>
+                <th width="10%" align="center">Endereço</th>
                 <th width="10%" align="center">Qtde. Anterior</th>
                 <th width="10%" align="center">Qtde. Movimentada</th>
                 <th width="10%" align="center">Qtde. Atual</th>
@@ -73,12 +74,13 @@ class MovimentacaoLivroEstoque extends Controller
                 <tr>
                     <td width="7%" align="center">' . $movimentacao[0] . '</td>
                     <td width="10%" align="center">' . $movimentacao[1] . '</td>
-                    <td width="20%" align="center">' . $movimentacao[2] . '</td>
+                    <td width="10%" align="center">' . $movimentacao[2] . '</td>
                     <td width="20%" align="center">' . $movimentacao[3] . '</td>
                     <td width="10%" align="center">' . $movimentacao[4] . '</td>
                     <td width="10%" align="center">' . $movimentacao[5] . '</td>
                     <td width="10%" align="center">' . $movimentacao[6] . '</td>
-                    <td width="8%" align="center">' . date("d/m/Y h:i:s",strtotime($movimentacao[7])) . '</td>
+                    <td width="10%" align="center">' . $movimentacao[7] . '</td>
+                    <td width="8%" align="center">' . date("d/m/Y h:i:s",strtotime($movimentacao[8])) . '</td>
                 </tr>
             </table>
 
