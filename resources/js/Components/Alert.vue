@@ -45,9 +45,6 @@
 
 import { ref, watch } from 'vue'
 import Toolbar from './Toolbar.vue';
-import ToolbarSuccess from './ToolbarSuccess.vue';
-import ToolbarError from './ToolbarError.vue';
-import ToolbarWarning from './ToolbarWarning.vue';
 
 const props = defineProps({
 
