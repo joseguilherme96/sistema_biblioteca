@@ -7,9 +7,15 @@
 
                     <template v-slot:default="{ isActive }">
                         <v-card>
-                            <ToolbarSuccess :data="{ title: dialogVisible.title }" v-if="dialogVisible.status == 'success'"></ToolbarSuccess>
-                            <ToolbarError :data="{ title: dialogVisible.title }" v-if="dialogVisible.status == 'error'"></ToolbarError>
-                            <ToolbarWarning :data="{ title: dialogVisible.title }"  v-if="dialogVisible.status == 'warning'"></ToolbarWarning>
+                            <Toolbar
+                                :data="{
+                                    title: dialogVisible.title,
+                                    color: dialogVisible.status == 'success' ? '#006400' : 
+                                    dialogVisible.status == 'error' ? '#FF6347' : 
+                                    dialogVisible.status == 'warning' ? '#FFD700' : ''
+                                    }">
+                            </Toolbar>
+
                             <v-row class="justify-center mt-5">
                                 <v-icon color="#FF6347" icon="mdi-alert" size="x-large"
                                     v-show="dialogVisible.status == 'error'"></v-icon>
@@ -20,7 +26,12 @@
                                 {{ dialogVisible.message }}
                             </v-card-text>
                             <template v-slot:actions>
-                                <v-btn variant="flat"  :color="dialogVisible.status == 'success' ? '#006400' : dialogVisible.status == 'error' ? '#FF6347' : '#FFD700'" class="ml-auto" text="Fechar" @click="dialogVisible.exibir = false" style="color: white;"></v-btn>
+                                <v-btn variant="flat"
+                                    :color="dialogVisible.status == 'success' ? '#006400' :
+                                            dialogVisible.status == 'error' ? '#FF6347' : 
+                                            dialogVisible.status == 'warning' ? '#FFD700' : ''"
+                                    class="ml-auto" text="Fechar" @click="dialogVisible.exibir = false"
+                                    style="color: white;"></v-btn>
                             </template>
                         </v-card>
                     </template>
@@ -32,7 +43,7 @@
 </template>
 <script setup>
 
-import {ref,watch} from 'vue'
+import { ref, watch } from 'vue'
 import Toolbar from './Toolbar.vue';
 import ToolbarSuccess from './ToolbarSuccess.vue';
 import ToolbarError from './ToolbarError.vue';

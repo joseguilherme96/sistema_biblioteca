@@ -1,6 +1,6 @@
 <template>
 
-    <v-toolbar :title="content.title" style="background-color: #310740; color: white;"></v-toolbar>
+    <v-toolbar :title="content.title" :color="content.color ? content.color : '#310740'" style=" color: white;"></v-toolbar>
 
 </template>
 
