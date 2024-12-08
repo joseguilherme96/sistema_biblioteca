@@ -12,11 +12,19 @@ import { createVuetify } from 'vuetify/lib/framework.mjs';
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+// Translations provided by Vuetify
+import { pt} from 'vuetify/locale'
+
 
 const vuetify = createVuetify({
 
     components,
-    directives
+    directives,
+    locale: {
+        locale: 'pt',
+        fallback: 'pt',
+        messages: { pt},
+      },
 
 })
 
