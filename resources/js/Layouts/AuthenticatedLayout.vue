@@ -112,11 +112,10 @@ watchEffect(() => {
                                         </v-btn>
                                     </template>
                                     <v-list>
-                                        <v-list-item :key="0">
+                                        <v-list-item :key="0" v-show="permissoes.livros.cadastro">
                                             <v-list-item-title>
                                                 <NavLink :href="route('cadastro-livro')"
-                                                    :active="route().current('dashboard')" class="nav-link"
-                                                    v-show="permissoes.livros.cadastro">
+                                                    :active="route().current('dashboard')" class="nav-link">
                                                     Cadastro
                                                 </NavLink>
                                             </v-list-item-title>
@@ -133,11 +132,10 @@ watchEffect(() => {
                                     </v-list>
                                 </v-menu>
                             </li>
-                            <li class="mr-5  mt-1"
-                                v-show="permissoes.estoque.entrada || permissoes.estoque.movimentacao_estoque">
+                            <li class="mr-5  mt-1">
                                 <v-menu open-on-hover>
                                     <template v-slot:activator="{ props }">
-                                        <v-btn color="#310740" v-bind="props">
+                                        <v-btn color="#310740" v-bind="props" :disabled="!permissoes.estoque.entrada && !permissoes.estoque.movimentacao_estoque">
                                             Estoque
                                         </v-btn>
                                     </template>
@@ -161,10 +159,10 @@ watchEffect(() => {
                                     </v-list>
                                 </v-menu>
                             </li>
-                            <li class="mr-5  mt-1" v-show="permissoes.reserva.lista_reservas">
+                            <li class="mr-5  mt-1">
                                 <v-menu open-on-hover>
                                     <template v-slot:activator="{ props }">
-                                        <v-btn color="#310740" v-bind="props">
+                                        <v-btn color="#310740" v-bind="props" :disabled="!permissoes.reserva.lista_reservas">
                                             Reserva
                                         </v-btn>
                                     </template>
