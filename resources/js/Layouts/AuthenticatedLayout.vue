@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, watchEffect,onMounted } from 'vue';
+import { ref, watch, watchEffect, onMounted } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -33,23 +33,27 @@ let permissoes = ref({
 
 })
 
-const verificaPermissoesDoUsuario =()=>{
-    
+const verificaPermissoesDoUsuario = () => {
+
     permissoes = {
         estoque: {
-            entrada: [1,3].includes(props.auth.user.nivel_acesso_id),
+            entrada: [1, 3].includes(props.auth.user.nivel_acesso_id),
             movimentacao_estoque: [1].includes(props.auth.user.nivel_acesso_id),
         },
         reserva: {
-            lista_reservas:[1].includes(props.auth.user.nivel_acesso_id),
-            cadastro_reservas:[1,3].includes(props.auth.user.nivel_acesso_id),
+            lista_reservas: [1].includes(props.auth.user.nivel_acesso_id),
+            cadastro_reservas: [1, 3].includes(props.auth.user.nivel_acesso_id),
         },
         livros: {
-            cadastro: [1,3].includes(props.auth.user.nivel_acesso_id),
-            lista: [1,2,3].includes(props.auth.user.nivel_acesso_id),
-            editar:[1,3].includes(props.auth.user.nivel_acesso_id),
-            deletar:[1,3].includes(props.auth.user.nivel_acesso_id)
+            cadastro: [1, 3].includes(props.auth.user.nivel_acesso_id),
+            lista: [1, 2, 3].includes(props.auth.user.nivel_acesso_id),
+            editar: [1, 3].includes(props.auth.user.nivel_acesso_id),
+            deletar: [1, 3].includes(props.auth.user.nivel_acesso_id)
         },
+        usuarios: {
+            cadastro: [1].includes(props.auth.user.nivel_acesso_id),
+            editar: [1].includes(props.auth.user.nivel_acesso_id)
+        }
     }
 
     emits('permissoes', permissoes)
@@ -63,12 +67,10 @@ watchEffect(() => {
 
 </script>
 <style>
-
-.hover-usuario-carrinho:hover{
+.hover-usuario-carrinho:hover {
 
     background-color: #310740;
 }
-
 </style>
 
 <template>
@@ -113,7 +115,8 @@ watchEffect(() => {
                                         <v-list-item :key="0">
                                             <v-list-item-title>
                                                 <NavLink :href="route('cadastro-livro')"
-                                                    :active="route().current('dashboard')" class="nav-link" v-show="permissoes.livros.cadastro">
+                                                    :active="route().current('dashboard')" class="nav-link"
+                                                    v-show="permissoes.livros.cadastro">
                                                     Cadastro
                                                 </NavLink>
                                             </v-list-item-title>
@@ -121,7 +124,8 @@ watchEffect(() => {
                                         <v-list-item :key="1">
                                             <v-list-item-title>
                                                 <NavLink :href="route('lista_livro')"
-                                                    :active="route().current('dashboard')" class="nav-link" v-show="permissoes.livros.lista">
+                                                    :active="route().current('dashboard')" class="nav-link"
+                                                    v-show="permissoes.livros.lista">
                                                     Lista
                                                 </NavLink>
                                             </v-list-item-title>
@@ -129,7 +133,8 @@ watchEffect(() => {
                                     </v-list>
                                 </v-menu>
                             </li>
-                            <li class="mr-5  mt-1" v-show="permissoes.estoque.entrada || permissoes.estoque.movimentacao_estoque">
+                            <li class="mr-5  mt-1"
+                                v-show="permissoes.estoque.entrada || permissoes.estoque.movimentacao_estoque">
                                 <v-menu open-on-hover>
                                     <template v-slot:activator="{ props }">
                                         <v-btn color="#310740" v-bind="props">
