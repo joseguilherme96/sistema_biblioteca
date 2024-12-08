@@ -24,6 +24,7 @@ class AtendimentoItemReserva extends Controller
                 $atendimentoItemReservadoModel->status_id = 1;
                 $atendimentoItemReservadoModel->user_id = $item['id_usuario'];
                 $atendimentoItemReservadoModel->quantidade_separada = $item['quantidade_para_baixa'];
+                $atendimentoItemReservadoModel->data_devolucao = $item['data_devolucao_utc'];
                 $atendimentoItemReservadoModel->save();
             }
 

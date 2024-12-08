@@ -22,6 +22,9 @@
                     <th class="text-left">
                         Quantidade Separada
                     </th>
+                    <th class="text-left">
+                        Data Devolução
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +34,7 @@
                     <td>{{ item.endereco }}</td>
                     <td>{{ item.quantidade_reservada }}</td>
                     <td>{{ item.quantidade_separada ? item.quantidade_separada : 0 }}</td>
+                    <td>{{ item.data_devolucao }}</td>
                 </tr>
             </tbody>
         </v-table>

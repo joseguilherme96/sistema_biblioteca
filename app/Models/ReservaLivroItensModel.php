@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class ReservaLivroItensModel extends Model
 {
@@ -21,6 +22,17 @@ class ReservaLivroItensModel extends Model
         'updated_at'
     ];
 
+    public function formataData($dados)
+    {
+
+        foreach ($dados as $value) {
+
+            $value->data_devolucao = Carbon::parse($value->data_devolucao)->format('d/m/Y');
+        }
+
+        return $dados;
+    }
+
     public function pesquisarItensReservados($where = [])
     {
 
@@ -29,7 +41,7 @@ class ReservaLivroItensModel extends Model
             ->join('estoque', 'reserva_livro_itens.estoque_id', '=', 'estoque.id_estoque')
             ->join('endereco_livro', 'estoque.endereco_id','=','endereco_livro.id_endereco')
             ->join('atendimento_item_reservado', 'reserva_livro_itens.id_item_reserva', '=', 'atendimento_item_reservado.item_reserv_id', 'left')
-            ->select('livro.*', 'reserva_livro_itens.*', 'atendimento_item_reservado.quantidade_separada','endereco_livro.descricao as endereco');
+            ->select('livro.*', 'reserva_livro_itens.*', 'atendimento_item_reservado.quantidade_separada','endereco_livro.descricao as endereco','atendimento_item_reservado.data_devolucao');
 
 
         if (!empty($where)) {
@@ -44,6 +56,6 @@ class ReservaLivroItensModel extends Model
             }
         }
 
-        return $reservaLivroItens->get();
+        return $this->formataData($reservaLivroItens->get());
     }
 }

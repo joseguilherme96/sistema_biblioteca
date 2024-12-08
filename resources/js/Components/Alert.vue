@@ -29,7 +29,7 @@
                                 <v-btn variant="flat"
                                     :color="dialogVisible.status == 'success' ? '#006400' :
                                             dialogVisible.status == 'error' ? '#FF6347' : 
-                                            dialogVisible.status == 'warning' ? '#FFD700' : ''"
+                                            dialogVisible.status == 'warning' ? '#FFD700' : '#310740'"
                                     class="ml-auto" text="Fechar" @click="dialogVisible.exibir = false"
                                     style="color: white;"></v-btn>
                             </template>
