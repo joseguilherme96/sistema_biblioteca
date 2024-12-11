@@ -6,11 +6,11 @@ Este projeto foi desenvolvido para o trabalho de conclusão do curso em Tecnolog
 
 - Autenticação
 - Cadastros de usuários por niveis de acesso
-- Verificação do niveis de acesso do usuários e liberação de recursos do sistema para o usuário de acordo com seu nivel de acesso.
+- Verificação do níveis de acesso dos usuários e liberação dos recursos do sistema para o usuário de acordo com seu nivel de acesso
 - Cadastro de livros
 - Cadastro de entrada de livros no estoque
 - Listagem de livros
-- Verificação automatica de disponibilidade de livros no estoque para reserva
+- Verificação automática de disponibilidade de livros no estoque para reserva
 - Geração de reservas de livros
 - Lista de reservas
 - Atendimento da reserva
