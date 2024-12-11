@@ -86,6 +86,15 @@ Copie o arquivo de exemplo para as configurar as variaveis de ambiente posterior
 
 ```
 
+### Criar link simbólico para imagens
+O sistema já vem com alguns cadastros de livros por padrão, por isso é preciso executar o comando abaixo, pois na listagem de livros, eles também possuem uma imagem da capa para cada livro e ao digitar o comando abaixo fará com que o laravel crie um link simbólico para que as imagens possam ser acessadas facilmente pela url e também faz com que as imagens das capas dos livros apareçam juntamente com os livros cadastrados.
+
+```bash
+
+    php artisan storage:link
+
+```
+
 ### Criação das tabelas no Mysql
 
 Para criação das tabelas no banco de dados, utilize o recurso de migração do laravel que automaticamente todas as tabelas serão criadas no MySQL.
