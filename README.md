@@ -19,8 +19,8 @@ Este projeto foi desenvolvido para o trabalho de conclusão do curso em Tecnolog
 
 ## Principais tecnologias
 
-[![Logo framework Vue.js](storage/app/public/imagens/logo_vue_js.png "Logo, framework vue.js")](https://github.com/joseguilherme96/sistema_biblioteca/blob/d2802d20986b37d8a07687a681af0169c3fe8c1e/storage/app/public/imagens/logo_vue_js.png)
+- [![Logo framework Vue.js](storage/app/public/imagens/logo_vue_js.png "Logo, framework vue.js")](https://github.com/joseguilherme96/sistema_biblioteca/blob/d2802d20986b37d8a07687a681af0169c3fe8c1e/storage/app/public/imagens/logo_vue_js.png)
 
-[![Logo framework vuetify](storage/app/public/imagens/log_vuetify.png "Logo, framework vuetify")](https://github.com/joseguilherme96/sistema_biblioteca/blob/d2802d20986b37d8a07687a681af0169c3fe8c1e/storage/app/public/imagens/log_vuetify.png)
+- [![Logo framework vuetify](storage/app/public/imagens/log_vuetify.png "Logo, framework vuetify")](https://github.com/joseguilherme96/sistema_biblioteca/blob/d2802d20986b37d8a07687a681af0169c3fe8c1e/storage/app/public/imagens/log_vuetify.png)
 
-[![Logo framework laravel](storage/app/public/imagens/logo_laravel.png "Logo, framework laravel")](https://github.com/joseguilherme96/sistema_biblioteca/blob/main/storage/app/public/imagens/logo_laravel.png)
+- [![Logo framework laravel](storage/app/public/imagens/logo_laravel.png "Logo, framework laravel")](https://github.com/joseguilherme96/sistema_biblioteca/blob/main/storage/app/public/imagens/logo_laravel.png)
