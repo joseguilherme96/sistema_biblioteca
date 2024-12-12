@@ -103,7 +103,7 @@ Após o banco de dados já estiver sido instalado de acordo com os requisitos. C
 
 ```
 
-### Exeute o comando para criação das tabelas no Mysql
+### Execute o comando para criação das tabelas no Mysql
 
 Para criação das tabelas no banco de dados, utilize o recurso de migração do laravel que automaticamente todas as tabelas serão criadas no MySQL.
 
