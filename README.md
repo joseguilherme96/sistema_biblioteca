@@ -8,12 +8,12 @@ Este projeto foi desenvolvido para o trabalho de conclusão do curso em Tecnolog
 - Cadastros de usuários por niveis de acesso
 - Verificação dos níveis de acesso dos usuários e liberação dos recursos do sistema para o usuário de acordo com seus previlégios
 - Cadastro de livros
-- Cadastro de entrada de livros no estoque
+- Cadastro de entradas de livros no estoque
 - Listagem de livros
 - Verificação automática dos livros disponíveis no estoque para reserva
 - Geração de reservas dos livros
-- Lista de reservas
-- Atendimento da reserva
+- Listagem de reservas
+- Atendimento de reservas
 - Relatório de movimentação de livros no estoque
 - Impressão de relatório
 
@@ -54,7 +54,7 @@ Clone o repositório.
 
 ### Crie um banco de dados
 
-Após o banco de dados estiver instalado. crie um banco de dados chamado sistema_biblioteca.
+Após o banco de dados estiver instalado. Crie um banco de dados chamado sistema_biblioteca com o comando abaixo.
 
 ```bash
 
@@ -78,8 +78,8 @@ Copie o arquivo de exemplo para as configurar as variaveis de ambiente posterior
 
 ```
 
-### Adicionando uma variável de ambiente
-Adicione a variável de ambiente abaixo ao arquivo .env, pois ela será resposável por guardar o caminho que as imagens das capas dos livros se encontra.
+### Adicione uma variável de ambiente
+Adicione a variável de ambiente abaixo ao arquivo .env, pois ela será responsável por guardar o caminho que as imagens das capas dos livros se encontra.
 
 ```bash
 
@@ -95,7 +95,7 @@ Adicione a variável de ambiente abaixo ao arquivo .env, pois ela será resposá
 
 ```
 
-### Criar link simbólico para imagens
+### Crie um link simbólico para acesso as imagens
 O sistema já vem com alguns cadastros de livros por padrão, por isso é preciso executar o comando abaixo, pois na listagem de livros, eles também possuem uma imagem da capa para cada livro e ao digitar o comando abaixo fará com que o laravel crie um link simbólico para que as imagens possam ser acessadas facilmente pela url e também faz com que as imagens das capas dos livros apareçam juntamente com os livros cadastrados.
 
 ```bash
@@ -104,7 +104,7 @@ O sistema já vem com alguns cadastros de livros por padrão, por isso é precis
 
 ```
 
-### Criação das tabelas no Mysql
+### Exeute o comando para criação das tabelas no Mysql
 
 Para criação das tabelas no banco de dados, utilize o recurso de migração do laravel que automaticamente todas as tabelas serão criadas no MySQL.
 
@@ -148,7 +148,7 @@ Para execução do servidor local, execute o seguinte comando, isso fará com qu
 
 ## Aplicação
 
-Após feito todo processo, a aplicação é para estar disponivel em [(http://127.0.0.1:8000)](http://127.0.0.1:8000).
+E pronto, após ter feito todo processo, a aplicação é para estar disponível em [(http://127.0.0.1:8000)](http://127.0.0.1:8000).
 
 Usuário e senha default para acesso: <br>
 
