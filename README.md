@@ -58,7 +58,7 @@ Após o banco de dados estiver instalado. crie um banco de dados chamado sistema
 
 ```bash
 
-    CREATE DATABASE sistema_biblioteca
+    php artisan app:create-data-base sistema_biblioteca
 
 ```
 
@@ -75,6 +75,15 @@ Copie o arquivo de exemplo para as configurar as variaveis de ambiente posterior
 ```bash
 
     cp .env.example .env
+
+```
+
+### Adicionando uma variável de ambiente
+Adicione a variável de ambiente abaixo ao arquivo .env, pois ela será resposável por guardar o caminho que as imagens das capas dos livros se encontra.
+
+```bash
+
+    VITE_CAMINHO_PASTA_IMAGENS_CAPA_LIVRO=storage/imagens/
 
 ```
 
