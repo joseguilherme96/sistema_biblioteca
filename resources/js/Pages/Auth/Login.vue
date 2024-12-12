@@ -59,7 +59,7 @@ const submit = () => {
             </v-col>
         </v-row>
         <div class="d-flex justify-content-center">
-            <small class="text-center" style="color: #310740;">Sistema de Gestão de Biblioteca</small>
+            <small class="text-center" style="color: #310740;">Sistema de Gerenciamento para Biblioteca</small>
         </div>
         <form @submit.prevent="submit">
             <div class="mb-3 mt-5">
