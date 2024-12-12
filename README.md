@@ -51,17 +51,6 @@ Clone o repositório.
 
 ```
 
-
-### Crie um banco de dados
-
-Após o banco de dados estiver instalado. Crie um banco de dados chamado sistema_biblioteca com o comando abaixo.
-
-```bash
-
-    php artisan app:create-data-base sistema_biblioteca
-
-```
-
 ### Instale as depêndencias
 
 ```bash
@@ -101,6 +90,16 @@ O sistema já vem com alguns cadastros de livros por padrão, por isso é precis
 ```bash
 
     php artisan storage:link
+
+```
+
+### Crie um banco de dados
+
+Após o banco de dados já estiver sido instalado de acordo com os requisitos. Crie um banco de dados chamado sistema_biblioteca com o comando abaixo.
+
+```bash
+
+    php artisan app:create-data-base sistema_biblioteca
 
 ```
 
